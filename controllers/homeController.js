@@ -18,14 +18,12 @@ myApp.controller("homeController", function ($scope, $http) {
      .success(function(){
      alert('กำลังจะประมวลผลใหม่');
      location.reload();
-     
      })
      }*/
 
     $scope.dataloaded = false;
 
     $scope.controllerName = "ข้อมูลประชากรผู้สูงอายุ";
-    //$scope.url = 'dataService/json/report1.json';
     $http.get('dataService/m_home.php')
             .success(function (response) {
                 $scope.older = response.records;
@@ -37,7 +35,6 @@ myApp.controller("homeController", function ($scope, $http) {
                 alert(ไม่สามารถประมวลผลข้อมูลได้);
             });
 })
-
 
 
 myApp.controller("olderController", function ($scope, $http) {
