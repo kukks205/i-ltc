@@ -71,20 +71,9 @@ myApp.controller("homeController", function ($scope, $http) {
 
 
 myApp.controller("olderController", function ($scope, $http) {
-
-    //alert(filsename);
- /*   $scope.unlink = function () {
-        $http.get('dataService/clear_m_home1.php')
-                .success(function () {
-                    alert('กำลังจะประมวลผลใหม่');
-                    location.reload();
-
-                })
-    }
-*/
     $scope.dataloaded = false;
     $scope.controllerName = "Hello Home";
-    //$scope.url = 'dataService/json/report1.json';
+
 
     $http.get('dataService/m_report1.php')
             .success(function (response) {

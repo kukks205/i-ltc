@@ -25,8 +25,6 @@
         }
 
         $scope.dataloaded = false;
-        //$scope.controllerName = "Hello Home";
-        //$scope.url = 'dataService/json/report1.json';
 
         $http.get('dataService/json/report1.json')
             .success(function(response) {
