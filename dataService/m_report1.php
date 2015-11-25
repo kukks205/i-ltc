@@ -12,7 +12,6 @@ foreach ($obj as $k) {
     array_push($json_data, $k);
 }
 
-
 $txt = json_encode($json_data);
 
 print_r('{"records":' . $txt . '}');
