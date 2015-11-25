@@ -1,0 +1,65 @@
+
+
+<h3>
+    Long Term Care Information System
+</h3>
+<p class="description">
+    ระบบสารสนเทศ การดูแลสุขภาพระยะยาว
+</p>
+<div class="grid">
+    <div class="row">
+        <div class="span12">
+            <div class="tile quadro double-vertical ol-transparent">
+                <div class="tile-content">
+                    <div class="carousel" data-role="carousel" data-height="100%" data-width="100%" data-controls="false" data-period='6000' data-duration='500' data-auto='true' data-markers-type='square' data-effect='fade'>
+                        <div class="slide">
+                            <img src="img/ltc1.jpg" />
+                        </div>
+                        <div class="slide">
+                            <img src="img/ltc2.jpg" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>หากต้องการดูรายงานผลงานการคัดกรองสามารถเข้าไปดูได้ใน เมนู Report -> การคัดกรอง -> สรุปการคัดกรองผู้สูงอายุ
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="panel" ng-controller="homeController">
+        <div class="panel-header">
+              <h3> {{controllerName}}</h3>
+                       <p class="description">
+            ประมวลผลล่าสุดเมื่อ {{older[0]['last_calc']}}
+            <button class="small primary" ng-click="unlink()"><i class="icon-spin on-left"></i>ประมวลผล</button>
+        </p>
+        </div>  
+   <div class="panel-content">
+        <table id="example" class="table striped hovered">
+            <thead>
+                <tr>
+                    <th>อำเภอ</th>
+                    <th>จำนวนประชากรทั้งหมด(คน)</th>
+                    <th>จำนวนผู้สุงอายุ(คน)</th>
+                    <th>ร้อยละ</th>
+                    <th>วันที่ประมวลผล</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="o in older">
+                    <td>{{o.name}}</td>
+                    <td align="center">{{o.pop_all |number}}</td>
+                    <td align="center">{{o.pop_old |number}}</td>
+                    <td align="center">{{(o.pop_old*100)/o.pop_all|number:2}}</td>
+                    <td align="center">{{o.last_calc}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-hide="dataloaded==true" align='center'>
+            <i class="ion-loading-c" style="font-size: 32px;"></i>กำลังประมวลผล...
+        </div>
+    </div>
+</div> 

@@ -1,0 +1,42 @@
+<!-- <p class="description">
+    ระบบสารสนเทศ การดูแลสุขภาพระยะยาว
+</p> -->
+<div class="panel" ng-controller="olderController">
+    <div class="panel-header">
+    <h3>
+    แบบรายงานการคัดกรองผู้สูงอายุ จังหวัดอุทัยธานี
+</h3>
+        
+        <p class="description">
+            ประมวลผลล่าสุดเมื่อ {{older[0]['last_calc']}}
+            <button class="small primary" ng-click="unlink()"><i class="icon-spin on-left"></i>ประมวลผล</button>
+        </p>
+    </div>
+    <div class="panel-content">
+        <div>
+            <table id="example" class="table striped hovered">
+                <thead>
+                    <tr>
+                        <th>ลำดับที่</th>
+                        <th>รายการ</th>
+                        <th>จำนวน(คน)</th>
+                        <th>ร้อยละ</th>
+                        <th>วันที่ประมวลผล</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="o in older">
+                        <td class="left">{{o.id}}</td>
+                        <td>{{o.name}}</td>
+                        <td>{{o.cc|number}}</td>
+                        <td>{{o.pp|number}}</td>
+                        <td>{{o.last_calc}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div ng-hide="dataloaded==true" align='center'>
+                <i class="ion-loading-c" style="font-size: 32px;"></i>กำลังประมวลผล...
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<!-- <p class="description">
+    ระบบสารสนเทศ การดูแลสุขภาพระยะยาว
+</p> -->
+<div class="panel" ng-controller="amplistController">
+    <div class="panel-header">
+    <h3>
+    แบบรายงานการคัดกรองผู้สูงอายุแยกรายอำเภอ จังหวัดอุทัยธานี
+</h3>
+        
+        <p class="description">
+            กรุณาเลือกอำเภอที่ต้องการดูรายละเอียด
+        </p>
+    </div>
+    <div class="panel-content">
+        <div>
+            <table id="example" class="table striped hovered">
+                <thead>
+                    <tr>
+                        <th>อำเภอ</th>
+                        <th>จำนวนหน่วยบริการ</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="a in amp">
+                        <td align="left">{{a.info_amp}}</td>
+                        <td align="center">{{a.info_countpcu}}</td>
+                        <td><a href="#/amp" class="image-button bg-darkGreen fg-white image-left" ng-click="">รายละเอียด <i class="icon-file-powerpoint bg-green fg-white"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div ng-hide="dataloaded==true" align='center'>
+                <i class="ion-loading-c" style="font-size: 32px;"></i>กำลังประมวลผล...
+            </div>
+        </div>
+    </div>
+</div>
