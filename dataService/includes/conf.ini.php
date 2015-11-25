@@ -1,7 +1,7 @@
 <?php 
-$hostname="203.157.212.119";
-$username="hhc";
-$password="hhc";
+$hostname="localhost";
+$username="root";
+$password="123";
 $dbname="datacenter";
 $charset="utf8";
 $port="3306";
