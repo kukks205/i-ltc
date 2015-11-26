@@ -13,14 +13,6 @@ var filsename = d.yyyymmdd();
 
 myApp.controller("homeController", function ($scope, $http) {
 
-    /* $scope.unlink = function(){
-     $http.get('dataService/clear_m_home.php')
-     .success(function(){
-     alert('กำลังจะประมวลผลใหม่');
-     location.reload();
-     })
-     }*/
-
     $scope.dataloaded = false;
 
     $scope.controllerName = "ข้อมูลประชากรผู้สูงอายุ";
@@ -39,7 +31,7 @@ myApp.controller("homeController", function ($scope, $http) {
 
 myApp.controller("olderController", function ($scope, $http) {
     $scope.dataloaded = false;
-    $scope.controllerName = "Hello Home";
+    //$scope.controllerName = "Hello Home";
     $http.get('dataService/m_report1.php')
             .success(function (response) {
                     $scope.older = response.records;
@@ -51,4 +43,33 @@ myApp.controller("olderController", function ($scope, $http) {
             });
 
 })
+
+/*myApp.controller("olderDController", function ($stateParams,$scope,$http) {
+    $scope.dataloaded = false;
+    $scope.cupcode=$stateParams.cupcode;
+    $http.get('dataService/m_pop_older_d.php?cupcode='+$scope.cupcode)
+            .success(function (response) {
+                    $scope.older = response.records;
+                    $scope.dataloaded = true;
+            })
+            .error(function () {
+               alert(ไม่สามารถประมวลผลข้อมูลได้);
+
+            });
+
+})*/
+
+/*myApp.controller('olderDController', ['$scope','$stateParams','$http', function($stateParams,$scope,$http) {
+    $scope.dataloaded = false;
+    $scope.cupcode=$stateParams.cupcode;
+    $http.get('dataService/m_pop_older_d.php?cupcode='+$scope.cupcode)
+            .success(function (response) {
+                    $scope.older = response.records;
+                    $scope.dataloaded = true;
+            })
+            .error(function () {
+               alert(ไม่สามารถประมวลผลข้อมูลได้);
+
+            });
+}])*/
 

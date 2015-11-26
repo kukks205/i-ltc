@@ -41,7 +41,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="o in older">
-                    <td>{{o.name}}</td>
+                    <td><a ng-href="#/pop_older_d/{{o.cupcode}}">{{o.name}}</a></td>
                     <td align="center">{{o.pop_all|number}}</td>
                     <td align="center">{{o.pop_old|number}}</td>
                     <td align="center">{{(o.pop_old*100)/o.pop_all|number:2}}</td>
