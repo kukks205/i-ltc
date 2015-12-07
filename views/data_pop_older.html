@@ -10,38 +10,44 @@
             <thead>
                 <tr>
                     <th rowspan="3" valign="top">อำเภอ</th>
-                    <th rowspan="3">จำนวนประชากรทั้งหมด(คน)</th>
-                    <th rowspan="3">จำนวนผู้สุงอายุเฉพาะอยู่จริง(คน)</th>
-                    <th rowspan="3">ร้อยละ</th>
+                    <th rowspan="3">ประชากรอยู่จริงทั้งหมด(คน)</th>
+                    <th rowspan="3">ผู้สุงอายุเฉพาะอยู่จริง(คน)</th>
+                    <th rowspan="3">%</th>
                     <th colspan="8">แยกตามช่วงวัย</th>
                     <th colspan="4">แยกตามการอยู่อาศัย</th>
                 </tr>
                     <tr>
-                    <th colspan="2">อายุ 60-69 ปี</th>
-                    <th colspan="2">อายุ 70-79 ปี</th>
-                    <th colspan="2">อายุ 80-89 ปี</th>
-                    <th colspan="2">อายุ 90 ปีขึนไป</th>
+                    <th colspan="2">60-69 ปี</th>
+                    <th colspan="2">70-79 ปี</th>
+                    <th colspan="2">80-89 ปี</th>
+                    <th colspan="2">90 ปีขึนไป</th>
                     <th colspan="2">อยู่คนเดียว</th>
                     <th colspan="2">อยู่กับครอบครัว</th>
                 </tr>
                 <tr>
                     <th>จำนวน</th>
-                    <th>ร้อยละ</th>
+                    <th>%</th>
                     <th>จำนวน</th>
-                    <th>ร้อยละ</th>
+                    <th>%</th>
                     <th>จำนวน</th>
-                    <th>ร้อยละ</th>
+                    <th>%</th>
                     <th>จำนวน</th>
-                    <th>ร้อยละ</th>
+                    <th>%</th>
                     <th>จำนวน</th>
-                    <th>ร้อยละ</th>
+                    <th>%</th>
                     <th>จำนวน</th>
-                    <th>ร้อยละ</th> 
+                    <th>%</th> 
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="o in older">
-                    <td><a ng-href="#/pop_older_d/{{o.cupcode}}">{{o.name}}</a></td>
+                    <td>
+                        <div ng-if="o.amp==0" >{{o.name}}</div>
+                        <div ng-if="o.amp>0">
+                            <a ng-href="#/pop_older_d/{{o.amp}}">{{o.name}}</a>
+                        </div>
+                        
+                    </td>
                     <td align="center">{{o.pop_all|number}}</td>
                     <td align="center">{{o.pop_old|number}}</td>
                     <td align="center">{{(o.pop_old*100)/o.pop_all|number:2}}</td>
