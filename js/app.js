@@ -17,6 +17,11 @@ myApp.config(function ($routeProvider) {
                 templateUrl: "views/report1.html"
             }
     ).when(
+            "/adl_amp", {
+                //controller: "olderController",
+                templateUrl: "views/data_adl_older.html"
+            }
+    ).when(
             "/pop_older1", {
                 //controller: "olderController",
                 templateUrl: "views/data_pop_older.html"
@@ -36,9 +41,6 @@ myApp.config(function ($routeProvider) {
                                 alert(ไม่สามารถประมวลผลข้อมูลได้);
 
                             });
-                            
-                            
-                            
                 },
                 resolve: {
                     cupcode: function ($route) {
@@ -47,8 +49,30 @@ myApp.config(function ($routeProvider) {
                 }
 
             }
-                    
-                    
+
+                ).when(
+            "/adl_older_d/:id", {
+                templateUrl: "views/amplist/adl_older_d.html",
+                controller: function ($scope, $http, cupcode) {
+                    $scope.dataloaded = false;
+                    $scope.cupcode = cupcode;
+                    $http.get('dataService/m_pop_older_d.php?cupcode=' + $scope.cupcode)
+                            .success(function (response) {
+                                $scope.older = response.records;
+                                $scope.dataloaded = true;
+                            })
+                            .error(function () {
+                                alert(ไม่สามารถประมวลผลข้อมูลได้);
+
+                            });
+                },
+                resolve: {
+                    cupcode: function ($route) {
+                        return $route.current.params.id;
+                    }
+                }
+
+            }
     ).when(
             "/about", {
                 controller: "aboutController",

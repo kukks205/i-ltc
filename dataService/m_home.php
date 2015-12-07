@@ -10,6 +10,10 @@ sum(p.pop_o3) as num_o3,
 sum(p.pop_o4) as num_o4,
 sum(p.wf) as num_wf,
 sum(p.alone) as num_alone,
+sum(p.t0) as t0,
+sum(p.t1) as t1,
+sum(p.t2) as t2,
+sum(p.t3) as t3,
 p.last_calc
 from ltc_pop_older_d AS p
 group by p.amp
@@ -24,6 +28,10 @@ sum(p.pop_o3) as num_o3,
 sum(p.pop_o4) as num_o4,
 sum(p.wf) as num_wf,
 sum(p.alone) as num_alone,
+sum(p.t0) as t0,
+sum(p.t1) as t1,
+sum(p.t2) as t2,
+sum(p.t3) as t3,
 p.last_calc
 from
 ltc_pop_older_d AS p");

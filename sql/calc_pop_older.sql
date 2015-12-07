@@ -10,7 +10,7 @@ concat(h.hosptype,h.`name`) as hospname,
 concat(h.chwpart,h.amppart) as amp,
 pa.pop_all,po.pop_old,
 o1.pop_o1,o2.pop_o2,o3.pop_o3,o4.pop_o4,
-l2.wf,l1.alone,
+l2.wf,l1.alone,adl1.t1,adl2.t2,adl3.t3,
 DATE_FORMAT(now(),'%d/%m/%Y %H:%i:%s') as last_calc
 from
 hospcode_cup AS hc
@@ -92,6 +92,34 @@ and p.death<>'Y' and p.person_discharge_id='9'
 and p.house_regist_type_id in (1,3)
 and p.age_y>59
 group by p.hospcode) as l2 on hc.hospcode=l2.hospcode
+
+left join (select p.hospcode,count(distinct p.cid) as t1
+from person AS p ,
+person_senile AS ps ,
+hhc_person_adl_screen as adl
+where ps.person_senile_self_type_id=1 
+and ps.person_id = p.person_id and p.hospcode = ps.hospcode
+and adl.hospcode=p.hospcode and adl.person_id=p.person_id
+group by p.hospcode) as adl1 on hc.hospcode=adl1.hospcode
+
+left join (select p.hospcode,count(distinct p.cid) as t2
+from person AS p ,
+person_senile AS ps ,
+hhc_person_adl_screen as adl
+where ps.person_senile_self_type_id=2 
+and ps.person_id = p.person_id and p.hospcode = ps.hospcode
+and adl.hospcode=p.hospcode and adl.person_id=p.person_id
+group by p.hospcode) as adl2 on hc.hospcode=adl2.hospcode
+
+left join (select p.hospcode,count(distinct p.cid) as t3
+from person AS p ,
+person_senile AS ps ,
+hhc_person_adl_screen as adl
+where ps.person_senile_self_type_id=3 
+and ps.person_id = p.person_id and p.hospcode = ps.hospcode
+and adl.hospcode=p.hospcode and adl.person_id=p.person_id
+group by p.hospcode) as adl3 on hc.hospcode=adl3.hospcode
+
 
 order by h.amppart) as pop on pop.amp=a.Amphur) as o ;
 
