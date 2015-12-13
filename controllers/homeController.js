@@ -44,6 +44,20 @@ myApp.controller("olderController", function ($scope, $http) {
 
 })
 
+myApp.controller("depressionController", function ($scope, $http) {
+    $scope.dataloaded = false;
+    $http.get('dataService/m_depression.php')
+            .success(function (response) {
+                    $scope.data = response.records;
+                    $scope.dataloaded = true;
+            })
+            .error(function () {
+               alert(ไม่สามารถประมวลผลข้อมูลได้);
+
+            });
+
+})
+
 /*myApp.controller("olderDController", function ($stateParams,$scope,$http) {
     $scope.dataloaded = false;
     $scope.cupcode=$stateParams.cupcode;
