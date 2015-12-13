@@ -50,24 +50,37 @@
                     <td align="center">{{(o.sc * 100)/o.old|number:2}}</td>
                     <td align="center">{{o.nr|number}}</td>
                     <td align="center">{{(o.nr * 100)/o.sc| number:2 }}</td>
-                    <td align="center">{{o.r|number}}</td>
-                    <td align="center">{{(o.r * 100)/o.sc| number:2 }}</td>
+                    <td align="center">
+                        <div ng-if="o.r < 1">0</div>
+                        <div ng-if="o.r > 0">{{o.r|number}}</div>   
+                    </td>
+                    <td align="center">
+                        <div ng-if="o.r < 1">0.00</div>
+                        <div ng-if="o.r > 0">{{(o.r * 100)/o.sc| number:2 }}</div>
+                    </td>
                     <td align="center">
                         <div ng-if="o.m < 1">0</div>
                         <div ng-if="o.m > 0">{{o.m|number}}</div>                        
                     </td>
-                    <td align="center">{{(o.m * 100)/o.r| number:2 }}</td>
+                    <td align="center">
+                        <div ng-if="o.m < 1">0.00</div>
+                        <div ng-if="o.m > 0">{{(o.m * 100)/o.r| number:2 }}</div>
+                    </td>
                     <td align="center">
                         <div ng-if="o.mo < 1">0</div>
                         <div ng-if="o.mo > 0">{{o.mo|number}}</div>                        
                     </td>
-                    <td align="center">{{(o.mo * 100)/o.r| number:2 }}</td>
+                    <td align="center">
+                        <div ng-if="o.mo < 1">0.00</div>
+                        <div ng-if="o.mo > 0">{{(o.mo * 100)/o.r| number:2 }}</div>
+                    </td>
                     <td align="center">
                         <div ng-if="o.se < 1">0</div>
                         <div ng-if="o.se > 0">{{o.se|number}}</div>
                     </td>
                     <td align="center">
-                        {{(o.se * 100)/o.r| number:2 }}
+                        <div ng-if="o.se < 1">0.00</div>
+                        <div ng-if="o.se > 0">{{(o.se * 100)/o.r| number:2 }}</div>
 
                     </td>
                 </tr>

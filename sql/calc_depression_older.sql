@@ -12,7 +12,7 @@ join person as p on p.patient_hn=v.hn and p.hospcode=v.hospcode
 where p.age_y>59  and p.death<>'Y' and p.person_discharge_id='9' and p.house_regist_type_id in (1,3) and v.vstdate between '2015-10-01' and '2016-09-30') as ds;
 
 DROP TABLE IF EXISTS ltc_depression_summary ;
-CREATE TABLE ltc_depression_summary select * from (select hc.hospcode,
+CREATE TABLE ltc_depression_summary select * from (select b.*,a.Amphur_name as ampname  from (select hc.hospcode,
 concat(h.hosptype,h.`name`) as hospname,
 concat(h.chwpart,h.amppart) as amp,
 po.pop_old,
@@ -26,7 +26,6 @@ DATE_FORMAT(now(),'%d/%m/%Y %H:%i:%s') as last_calc
 from
 hospcode_cup as hc
 join hospcode as h on h.hospcode = hc.hospcode
-
 join (select 
 p.hospcode,
 count(distinct p.cid) as pop_old
@@ -55,7 +54,7 @@ max(vn),hospcode,person_id,feel_boring_2_week,feel_depression_2_week,depression_
 from
 ltc_depression_screen AS dp
 group by dp.hospcode,dp.person_id) AS dp
-where dp.feel_boring_2_week='N' and feel_depression_2_week='N' and dp.depression_score < 7
+where dp.feel_boring_2_week='N' and feel_depression_2_week='N' and dp.depression_score<7
 group by dp.hospcode) as d0 on d0.hospcode=hc.hospcode
 
 left join (select
@@ -67,7 +66,7 @@ max(vn),hospcode,person_id,feel_boring_2_week,feel_depression_2_week,depression_
 from
 ltc_depression_screen AS dp
 group by dp.hospcode,dp.person_id) AS dp
-where (dp.feel_boring_2_week='Y' or feel_depression_2_week='Y') and dp.depression_score > 6
+where (dp.feel_boring_2_week='Y' or feel_depression_2_week='Y') and dp.depression_score>6 
 group by dp.hospcode) as d2 on d2.hospcode=hc.hospcode
 
 left join (select
@@ -104,6 +103,7 @@ from
 ltc_depression_screen AS dp
 group by dp.hospcode,dp.person_id) AS dp
 where (dp.feel_boring_2_week='Y' or feel_depression_2_week='Y') and dp.depression_score >18
-group by dp.hospcode) as d5 on d5.hospcode=hc.hospcode) as d1; 
+group by dp.hospcode) as d5 on d5.hospcode=hc.hospcode) as b
+join Amphur a on b.amp=a.Amphur ) as d1; 
 
 END
