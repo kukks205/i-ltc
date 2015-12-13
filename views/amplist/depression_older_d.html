@@ -1,0 +1,101 @@
+<div class="panel">
+    <div class="panel-header">
+        <h4>ข้อมูลผู้สูงอายุที่ได้รับการคัดกรองภาวะซึมเศร้า ในจังหวัดอุทัยธานี จำแนกตามอำเภอ</h4>
+        <p class="description">
+            ประมวลผลล่าสุดเมื่อ {{data[0]['last_calc']}}
+        </p>
+    </div>  
+    <div class="panel-content">
+        <table id="example" class="table striped hovered">
+            <thead>
+                <tr>
+                    <th rowspan="3" valign="top">อำเภอ</th>
+                    <th rowspan="3">ผู้สุงอายุเฉพาะอยู่จริง(คน)</th>
+                    <th rowspan="3">ได้รับการคัดกรอง(คน)</th>
+                    <th rowspan="3">%</th>
+                    <th colspan="4">ผลการคัดกรอง</th>
+                    <th colspan="6">แบ่งตามระดับภาวะซึมเศร้า</th>
+                </tr>
+                <tr>
+                    <th colspan="2">ปกติ</th>
+                    <th colspan="2">ซึมเศร้า</th>
+                    <th colspan="2">Mild Depression</th>
+                    <th colspan="2">Moderate Depression</th>
+                    <th colspan="2">Severe   Depression</th>
+                </tr>
+                <tr>
+                    <th>จำนวน</th>
+                    <th>%</th>
+                    <th>จำนวน</th>
+                    <th>%</th>
+                    <th>จำนวน</th>
+                    <th>%</th>
+                    <th>จำนวน</th>
+                    <th>%</th>
+                    <th>จำนวน</th>
+                    <th>%</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="o in data">
+                    <td>
+                        <div>{{o.hospname}}</div>
+
+                    </td>
+                    <td align="center">{{o.old|number}}</td>
+                    <td align="center">
+                        <div ng-if="o.sc < 1">0</div>
+                        <div ng-if="o.sc > 0">{{o.sc|number}}</div>
+                    </td>
+                    <td align="center">
+                        {{(o.sc * 100)/o.old|number:2}}
+                    </td>
+                    <td align="center">
+                       <div ng-if="o.nr < 1">0</div>
+                        <div ng-if="o.nr > 0">{{o.nr|number}}</div>   
+                    </td>
+                    <td align="center">
+                        <div ng-if="o.nr < 1">0.00</div>
+                        <div ng-if="o.nr > 0">{{(o.nr * 100)/o.sc| number:2 }}</div>
+                    </td>
+                    <td align="center">
+                        <div ng-if="o.r < 1">0</div>
+                        <div ng-if="o.r > 0">{{o.r|number}}</div>                        
+                    </td>
+                    <td align="center">
+                        <div ng-if="o.r < 1">0.00</div>
+                        <div ng-if="o.r > 0">{{(o.r * 100)/o.sc| number:2 }}</div>
+                    </td>
+                    <td align="center">
+                        <div ng-if="o.m < 1">0</div>
+                        <div ng-if="o.m > 0">{{o.m|number}}</div>                        
+                    </td>
+                    <td align="center">
+                        <div ng-if="o.m < 1">0.00</div>
+                        <div ng-if="o.m > 0">{{(o.m * 100)/o.r| number:2 }}</div>
+                    </td>
+                    <td align="center">
+                        <div ng-if="o.mo < 1">0</div>
+                        <div ng-if="o.mo > 0">{{o.mo|number}}</div>                        
+                    </td>
+                    <td align="center">
+                        <div ng-if="o.mo < 1">0.00</div>
+                        <div ng-if="o.mo > 0">{{(o.mo * 100)/o.r| number:2 }}</div>
+                    </td>
+                    <td align="center">
+                        <div ng-if="o.se < 1">0</div>
+                        <div ng-if="o.se > 0">{{o.se|number}}</div>
+                    </td>
+                    <td align="center">
+                        <div ng-if="o.se < 1">0.00</div>
+                        <div ng-if="o.se > 0">{{(o.se * 100)/o.r| number:2 }}</div>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-hide="dataloaded == true" align='center'>
+            <i class="ion-loading-c" style="font-size: 32px;"></i>กำลังประมวลผล...
+        </div>
+    </div>
+</div>

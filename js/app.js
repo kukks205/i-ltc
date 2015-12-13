@@ -54,6 +54,30 @@ myApp.config(function ($routeProvider) {
                 }
 
             }
+                    
+    ).when(
+            "/depress_older_d/:id", {
+                templateUrl: "views/amplist/depression_older_d.html",
+                controller: function ($scope, $http, cupcode) {
+                    $scope.dataloaded = false;
+                    $scope.cupcode = cupcode;
+                    $http.get('dataService/m_depression_d.php?cupcode=' + $scope.cupcode)
+                            .success(function (response) {
+                                $scope.data = response.records;
+                                $scope.dataloaded = true;
+                            })
+                            .error(function () {
+                                alert(ไม่สามารถประมวลผลข้อมูลได้);
+
+                            });
+                },
+                resolve: {
+                    cupcode: function ($route) {
+                        return $route.current.params.id;
+                    }
+                }
+
+            }                    
 
                 ).when(
             "/adl_older_d/:id", {
