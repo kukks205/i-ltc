@@ -10,7 +10,8 @@ concat(h.hosptype,h.`name`) as hospname,
 concat(h.chwpart,h.amppart) as amp,
 pa.pop_all,po.pop_old,
 o1.pop_o1,o2.pop_o2,o3.pop_o3,o4.pop_o4,
-l2.wf,l1.alone,adl1.t1,adl2.t2,adl3.t3,
+l2.wf,l1.alone,(if(adl1.t1 is null,0,adl1.t1)+if(adl2.t2 is null,0,adl2.t2)+if(adl3.t3 is null,0,adl3.t3)) as t0,
+if(adl1.t1 is null,0,adl1.t1) as t1,if(adl2.t2 is null,0,adl2.t2) as t2,if(adl3.t3 is null,0,adl3.t3) as t3,
 DATE_FORMAT(now(),'%d/%m/%Y %H:%i:%s') as last_calc
 from
 hospcode_cup AS hc
