@@ -4,17 +4,18 @@ DROP TABLE IF EXISTS ltc_depression_screen ;
 CREATE TABLE ltc_depression_screen  select *,DATE_FORMAT(now(),'%d/%m/%Y %H:%i:%s') as last_calc  from (select p.person_id,v.hn,v.vn,v.vstdate,
 d.feel_depression_2_week,
 d.feel_boring_2_week,d.depression_score,
-d.suicide_score,d.no_depression,d.hospcode,p.house_regist_type_id from 
-depression_screen as d,
-vn_stat as v ,
+d.suicide_score,d.no_depression,d.hospcode,p.house_regist_type_id
+from
+depression_screen as d, 
+vn_stat as v,
 person as p
-where d.vn=v.vn 
-and d.hospcode=v.hospcode 
-and p.patient_hn=v.hn
-and p.hospcode=v.hospcode
-and v.age_y>59 and v.vstdate between '2015-10-01' 
-and '2016-09-30' and p.death<>'Y' 
-and p.person_discharge_id='9') as ds;
+where 
+d.vn=v.vn 
+and d.hospcode=v.hospcode
+and v.age_y>59 
+and v.vstdate between '2015-10-01' and '2016-09-30'
+and p.death<>'y'
+and p.patient_hn=v.hn and p.hospcode=v.hospcode) as ds;
 
 DROP TABLE IF EXISTS ltc_depression_summary ;
 CREATE TABLE ltc_depression_summary select * from (select b.*,a.Amphur_name as ampname  from (select hc.hospcode,
