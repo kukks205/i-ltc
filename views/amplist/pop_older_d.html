@@ -1,13 +1,26 @@
-<div class="panel" >
-        <div class="panel-header">
-            <h4>ข้อมูลประชากร ข้อมูลผู้สูงอายุ การแบ่งตามอายุ และการอยู่อาศัยในอำเภอ{{older[0]['ampname']}}</h4>
-        <p class="description">
-            {{data[0]['ampname']}}
-            ประมวลผลล่าสุดเมื่อ {{older[0]['last_calc']}}
-        </p>
-        </div>  
-   <div class="panel-content">     
-        <table id="example" class="table striped hovered">
+<div class="flex-grid demo-grid">
+    <div class="row cell-auto-size">
+        <div class="cell colspan12">
+            <h4> <small></small></h4>
+            <blockquote>
+                <h4>ประชากรผู้สูงอายุ การแบ่งตามอายุ และการอยู่อาศัยในอำเภอ{{older[0]['ampname']}}</h4>
+                <small>ประมวลผลล่าสุดเมื่อ {{older[0]['last_calc']}}</small>
+            </blockquote>
+            <div class="clearfix"></div>
+            <div class="align-right">
+                <a href="#/pop_older1" class="button success"><i class="icon mif-chevron-left"></i> กลับ</a>
+                <button class="image-button success">
+                    Excel
+                    <span class="icon mif-file-excel bg-darkGreen"></span>
+                </button>
+                <button class="image-button success">
+                    Print
+                    <span class="icon mif-printer bg-darkGreen"></span>
+                </button>
+            </div>
+
+            <!--<hr  class="bg-gray"/>-->
+            <table id="example" class="table striped hovered cell-hovered border bordered" width="100%">
             <thead>
                 <tr>
                     <th rowspan="3" valign="top">หน่วยบริการ</th>
@@ -60,9 +73,12 @@
                     <td align="center">{{(o.wf * 100)/o.pop_old| number:2 }}</td>
                 </tr>
             </tbody>
-        </table>
-        <div ng-hide="dataloaded==true" align='center'>
-            <i class="ion-loading-c" style="font-size: 32px;"></i>กำลังประมวลผล...
+            </table>
+
+            <div ng-hide="dataloaded == true" align='center'>
+                <span style='padding-left: 45px;'><i data-role="preloader" data-type="ring"  data-style="color"></i><small>กำลังประมวลผล....</small></span>
+                <!--<i class="ion-loading-c" style="font-size: 32px;"></i>กำลังประมวลผล...-->
+            </div>
         </div>
     </div>
 </div>

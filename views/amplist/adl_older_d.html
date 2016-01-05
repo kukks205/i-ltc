@@ -1,35 +1,47 @@
-<div class="panel" >
-        <div class="panel-header">
-            <h4>ผู้สูงอายุที่ได้รับการคัดกรอง ADL จำแนกตามสมรรถนะในอำเภอ{{older[0]['ampname']}}</h4>
-        <p class="description">
-            {{data[0]['ampname']}}
-            ประมวลผลล่าสุดเมื่อ {{older[0]['last_calc']}}
-        </p>
-        </div>  
-   <div class="panel-content">     
-        <table id="example" class="table striped hovered">
-            <thead>
-                <tr>
-                    <th rowspan="3" valign="top">อำเภอ</th>
-                    <th rowspan="3">ผู้สุงอายุเฉพาะอยู่จริง(คน)</th>
-                    <th rowspan="3">คัดกรอง</th>
-                    <th rowspan="3">%</th>
-                    <th colspan="6">แบ่งตามสมรรถนะ</th>
-                </tr>
+<div class="flex-grid demo-grid">
+    <div class="row cell-auto-size">
+        <div class="cell colspan12">
+            <h4> <small></small></h4>
+            <blockquote>
+                <h4>ผู้สูงอายุที่ได้รับการคัดกรอง Bartel ADL จำแนกตามสมรรถนะในอำเภอ{{older[0]['ampname']}}</h4>
+                <small>ประมวลผลล่าสุดเมื่อ {{older[0]['last_calc']}}</small>
+            </blockquote>
+            <div class="clearfix"></div>
+            <div class="align-right">
+                <a href="#/adl_amp" class="button success"><i class="icon mif-chevron-left"></i> กลับ</a>
+                <button class="image-button success">
+                    Excel
+                    <span class="icon mif-file-excel bg-darkGreen"></span>
+                </button>
+                <button class="image-button success">
+                    Print
+                    <span class="icon mif-printer bg-darkGreen"></span>
+                </button>
+            </div>
+
+            <table id="example" class="table striped hovered cell-hovered border bordered" width="100%">
+                <thead>
                     <tr>
-                    <th colspan="2">ติดสังคม</th>
-                    <th colspan="2">ติดบ้าน</th>
-                    <th colspan="2">ติดเตียง</th>
-                </tr>
-                <tr>
-                    <th>จำนวน</th>
-                    <th>%</th>
-                    <th>จำนวน</th>
-                    <th>%</th>
-                    <th>จำนวน</th>
-                    <th>%</th>
-                </tr>
-            </thead>
+                        <th rowspan="3" class="v-align-middle">อำเภอ</th>
+                        <th rowspan="3">ผู้สุงอายุเฉพาะอยู่จริง(คน)</th>
+                        <th rowspan="3">คัดกรอง</th>
+                        <th rowspan="3">%</th>
+                        <th colspan="6">แบ่งตามสมรรถนะ</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">ติดสังคม</th>
+                        <th colspan="2">ติดบ้าน</th>
+                        <th colspan="2">ติดเตียง</th>
+                    </tr>
+                    <tr>
+                        <th>จำนวน</th>
+                        <th>%</th>
+                        <th>จำนวน</th>
+                        <th>%</th>
+                        <th>จำนวน</th>
+                        <th>%</th>
+                    </tr>
+                </thead>
             <tbody>
                 <tr ng-repeat="o in older">
                     <td>{{o.hospname}}</td>
@@ -56,9 +68,11 @@
                     <td align="center">{{(o.t3 * 100)/o.pop_old| number:2 }}</td>
                 </tr>
             </tbody>
-        </table>
-        <div ng-hide="dataloaded==true" align='center'>
-            <i class="ion-loading-c" style="font-size: 32px;"></i>กำลังประมวลผล...
+            </table>
+            <div ng-hide="dataloaded == true" align='center'>
+                <span style='padding-left: 45px;'><i data-role="preloader" data-type="ring"  data-style="color"></i><small>กำลังประมวลผล....</small></span>
+                <!--<i class="ion-loading-c" style="font-size: 32px;"></i>กำลังประมวลผล...-->
+            </div>
         </div>
     </div>
 </div>
