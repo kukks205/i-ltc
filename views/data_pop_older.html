@@ -1,73 +1,78 @@
-<div class="panel" ng-controller="homeController">
-        <div class="panel-header">
-              <h4>ข้อมูลประชากร ข้อมูลผู้สูงอายุ การแบ่งตามอายุ และการอยู่อาศัยในจังหวัดอุทัยธานี จำแนกตามอำเภอ</h4>
-        <p class="description">
-            ประมวลผลล่าสุดเมื่อ {{older[0]['last_calc']}}
-        </p>
-        </div>  
-   <div class="panel-content">
-        <table id="example" class="table striped hovered">
-            <thead>
-                <tr>
-                    <th rowspan="3" valign="top">อำเภอ</th>
-                    <th rowspan="3">ประชากรอยู่จริงทั้งหมด(คน)</th>
-                    <th rowspan="3">ผู้สุงอายุเฉพาะอยู่จริง(คน)</th>
-                    <th rowspan="3">%</th>
-                    <th colspan="8">แยกตามช่วงวัย</th>
-                    <th colspan="4">แยกตามการอยู่อาศัย</th>
-                </tr>
+<div class="flex-grid demo-grid" ng-controller="homeController">
+    <div class="row cell-auto-size">
+        <div class="cell colspan12">
+            <h4> <small></small></h4>
+            <blockquote>
+                <h4>ข้อมูลผู้สูงอายุ การแบ่งตามอายุ และการอยู่อาศัยในจังหวัดอุทัยธานี จำแนกตามอำเภอ</h4>
+                <small>ประมวลผลล่าสุดเมื่อ {{older[0]['last_calc']}}</small>
+            </blockquote>
+            <div class="clearfix"></div>
+            <!--<hr  class="bg-gray"/>-->
+            <table id="example" class="table striped hovered cell-hovered border bordered" width="100%">
+                <thead>
                     <tr>
-                    <th colspan="2">60-69 ปี</th>
-                    <th colspan="2">70-79 ปี</th>
-                    <th colspan="2">80-89 ปี</th>
-                    <th colspan="2">90 ปีขึนไป</th>
-                    <th colspan="2">อยู่คนเดียว</th>
-                    <th colspan="2">อยู่กับครอบครัว</th>
-                </tr>
-                <tr>
-                    <th>จำนวน</th>
-                    <th>%</th>
-                    <th>จำนวน</th>
-                    <th>%</th>
-                    <th>จำนวน</th>
-                    <th>%</th>
-                    <th>จำนวน</th>
-                    <th>%</th>
-                    <th>จำนวน</th>
-                    <th>%</th>
-                    <th>จำนวน</th>
-                    <th>%</th> 
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="o in older">
-                    <td>
-                        <div ng-if="o.amp==0" >{{o.name}}</div>
-                        <div ng-if="o.amp>0">
-                            <a ng-href="#/pop_older_d/{{o.amp}}">{{o.name}}</a>
-                        </div>
-                        
-                    </td>
-                    <td align="center">{{o.pop_all|number}}</td>
-                    <td align="center">{{o.pop_old|number}}</td>
-                    <td align="center">{{(o.pop_old*100)/o.pop_all|number:2}}</td>
-                    <td align="center">{{o.num_o1|number}}</td>
-                    <td align="center">{{(o.num_o1 * 100)/o.pop_old| number:2 }}</td>
-                    <td align="center">{{o.num_o2|number}}</td>
-                    <td align="center">{{(o.num_o2 * 100)/o.pop_old| number:2 }}</td>
-                    <td align="center">{{o.num_o3|number}}</td>
-                    <td align="center">{{(o.num_o3 * 100)/o.pop_old| number:2 }}</td>
-                    <td align="center">{{o.num_o4|number}}</td>
-                    <td align="center">{{(o.num_o4 * 100)/o.pop_old| number:2 }}</td>
-                    <td align="center">{{o.num_alone|number}}</td>
-                    <td align="center">{{(o.num_alone * 100)/o.pop_old| number:2 }}</td>
-                    <td align="center">{{o.num_wf|number}}</td>
-                    <td align="center">{{(o.num_wf * 100)/o.pop_old| number:2 }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <div ng-hide="dataloaded==true" align='center'>
-            <i class="ion-loading-c" style="font-size: 32px;"></i>กำลังประมวลผล...
+                        <th rowspan="3" class="v-align-middle">อำเภอ</th>
+                        <th rowspan="3">ประชากรอยู่จริงทั้งหมด(คน)</th>
+                        <th rowspan="3">ผู้สุงอายุเฉพาะอยู่จริง(คน)</th>
+                        <th rowspan="3">%</th>
+                        <th colspan="8">แยกตามช่วงวัย</th>
+                        <th colspan="4">แยกตามการอยู่อาศัย</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">60-69 ปี</th>
+                        <th colspan="2">70-79 ปี</th>
+                        <th colspan="2">80-89 ปี</th>
+                        <th colspan="2">90 ปีขึนไป</th>
+                        <th colspan="2">อยู่คนเดียว</th>
+                        <th colspan="2">อยู่กับครอบครัว</th>
+                    </tr>
+                    <tr>
+                        <th>จำนวน</th>
+                        <th>%</th>
+                        <th>จำนวน</th>
+                        <th>%</th>
+                        <th>จำนวน</th>
+                        <th>%</th>
+                        <th>จำนวน</th>
+                        <th>%</th>
+                        <th>จำนวน</th>
+                        <th>%</th>
+                        <th>จำนวน</th>
+                        <th>%</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="o in older">
+                        <td>
+                            <div ng-if="o.amp == 0" >{{o.name}}</div>
+                            <div ng-if="o.amp > 0">
+                                <a ng-href="#/pop_older_d/{{o.amp}}">{{o.name}}</a>
+                            </div>
+
+                        </td>
+                        <td align="center">{{o.pop_all|number}}</td>
+                        <td align="center">{{o.pop_old|number}}</td>
+                        <td align="center">{{(o.pop_old * 100)/o.pop_all|number:2}}</td>
+                        <td align="center">{{o.num_o1|number}}</td>
+                        <td align="center">{{(o.num_o1 * 100)/o.pop_old| number:2 }}</td>
+                        <td align="center">{{o.num_o2|number}}</td>
+                        <td align="center">{{(o.num_o2 * 100)/o.pop_old| number:2 }}</td>
+                        <td align="center">{{o.num_o3|number}}</td>
+                        <td align="center">{{(o.num_o3 * 100)/o.pop_old| number:2 }}</td>
+                        <td align="center">{{o.num_o4|number}}</td>
+                        <td align="center">{{(o.num_o4 * 100)/o.pop_old| number:2 }}</td>
+                        <td align="center">{{o.num_alone|number}}</td>
+                        <td align="center">{{(o.num_alone * 100)/o.pop_old| number:2 }}</td>
+                        <td align="center">{{o.num_wf|number}}</td>
+                        <td align="center">{{(o.num_wf * 100)/o.pop_old| number:2 }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div ng-hide="dataloaded == true" align='center'>
+                <span style='padding-left: 45px;'><i data-role="preloader" data-type="ring"  data-style="color"></i><small>กำลังประมวลผล....</small></span>
+                <!--<i class="ion-loading-c" style="font-size: 32px;"></i>กำลังประมวลผล...-->
+            </div>
         </div>
     </div>
 </div>

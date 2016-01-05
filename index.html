@@ -1,47 +1,50 @@
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="description" content="Simple responsive css framework">
+        <meta name="keywords" content="i-ltc">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="product" content="Metro UI CSS Framework">
-    <meta name="description" content="Simple responsive css framework">
-    <meta name="keywords" content="hhc">
-    <link href="css/metro-bootstrap.css" rel="stylesheet">
-    <link href="css/metro-bootstrap-responsive.css" rel="stylesheet">
-    <link href="css/iconFont.css" rel="stylesheet">
-    <link href="css/docs.css" rel="stylesheet">
-    <link href="js/prettify/prettify.css" rel="stylesheet">
-    <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
-    <!-- load angularjs -->
-    <script src="lib/angular-1.4.5/angular.js"></script>
-    <script src="lib/angular-1.4.5/angular-route.js"></script>
+        <link href="css/metro.css" rel="stylesheet">
+        <link href="css/metro-icons.css" rel="stylesheet">
+        <link href="css/metro-responsive.css" rel="stylesheet">
+        <link href="css/metro-schemes.css" rel="stylesheet">
+        <link href="css/docs.css" rel="stylesheet">
 
-    <!-- load myApp -->
-    <script src="js/app.js"></script>
-    <script src="controllers/homeController.js"></script>
-    <script src="controllers/amplistController.js"></script>
-    
-    <!-- Load JavaScript Libraries -->
-    <script src="js/jquery/jquery.min.js"></script>
-    <script src="js/jquery/jquery.widget.min.js"></script>
-    <script src="js/jquery/jquery.mousewheel.js"></script>
-    <script src="js/prettify/prettify.js"></script>
-    <!-- Metro UI CSS JavaScript plugins -->
-    <script src="js/load-metro.js"></script>
-    <!-- Local JavaScript -->
-    <script src="js/docs.js"></script>
-    <script src="js/github.info.js"></script>
-    <title>i-LTC : Information for Long Term Care</title>
-</head>
+        <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+        <!-- load angularjs -->
+        <script src="lib/angular-1.4.5/angular.js"></script>
+        <script src="lib/angular-1.4.5/angular-route.js"></script>
 
-<body class="metro" ng-app="myApp">
-    <header class="bg-dark" data-load="header.html"></header>
-
-    <div ng-view class="container">
+        <!-- load myApp -->
+        <script src="js/app.js"></script>
+        <script src="controllers/homeController.js"></script>
+        <script src="controllers/amplistController.js"></script>
         
-    </div>
+        
+        <!-- Load JavaScript Libraries -->
+        <script src="js/jquery/jquery.min.js"></script>
+        <script src="js/jquery/jquery.widget.min.js"></script>
+        <script src="js/jquery/jquery.mousewheel.js"></script>
+        <script src="js/metro.js"></script>
+        <script src="js/docs.js"></script>
+        <script src="js/prettify/run_prettify.js"></script>
+        <script src="js/ga.js"></script>
 
-</body>
+        <title>i-LTC : Information for Long Term Care</title>
+    </head>
 
+    <body class="metro" ng-app="myApp">
+    
+        <header class="bg-dark" data-load="header.html"></header>
+        <div ng-view class='container clearfix' style="padding-top: 15px;">
+
+        </div>
+    </body>
 </html>
