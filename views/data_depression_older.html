@@ -1,15 +1,26 @@
-<div class="panel" ng-controller="depressionController">
-    <div class="panel-header">
-        <h4>ข้อมูลผู้สูงอายุที่ได้รับการคัดกรองภาวะซึมเศร้า ในจังหวัดอุทัยธานี จำแนกตามอำเภอ</h4>
-        <p class="description">
-            ประมวลผลล่าสุดเมื่อ {{data[0]['last_calc']}}
-        </p>
-    </div>  
-    <div class="panel-content">
-        <table id="example" class="table striped hovered">
+<div class="flex-grid demo-grid" ng-controller="depressionController">
+    <div class="row cell-auto-size">
+        <div class="cell colspan12">
+            <h4> <small></small></h4>
+            <blockquote>
+                <h4>ผู้สูงอายุที่ได้รับการคัดกรองภาวะซึมเศร้า ในจังหวัดอุทัยธานี จำแนกตามอำเภอ</h4>
+                <small>ประมวลผลล่าสุดเมื่อ {{data[0]['last_calc']}}</small>
+            </blockquote>
+            <div class="clearfix"></div>
+            <div class="align-right">
+                <button class="image-button success">
+                    Excel
+                    <span class="icon mif-file-excel bg-darkGreen"></span>
+                </button>
+                <button class="image-button success">
+                    Print
+                    <span class="icon mif-printer bg-darkGreen"></span>
+                </button>
+            </div>
+<table id="example" class="table striped hovered cell-hovered border bordered" width="100%">
             <thead>
                 <tr>
-                    <th rowspan="3" valign="top">อำเภอ</th>
+                    <th rowspan="3" class="v-align-middle">อำเภอ</th>
                     <th rowspan="3">ผู้สุงอายุเฉพาะอยู่จริง(คน)</th>
                     <th rowspan="3">ได้รับการคัดกรอง(คน)</th>
                     <th rowspan="3">%</th>
@@ -86,8 +97,12 @@
                 </tr>
             </tbody>
         </table>
-        <div ng-hide="dataloaded == true" align='center'>
-            <i class="ion-loading-c" style="font-size: 32px;"></i>กำลังประมวลผล...
+            
+            
+                        <div ng-hide="dataloaded == true" align='center'>
+                <span style='padding-left: 45px;'><i data-role="preloader" data-type="ring"  data-style="color"></i><small>กำลังประมวลผล....</small></span>
+                <!--<i class="ion-loading-c" style="font-size: 32px;"></i>กำลังประมวลผล...-->
+            </div>
         </div>
     </div>
 </div>
