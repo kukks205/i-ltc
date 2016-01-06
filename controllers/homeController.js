@@ -9,12 +9,6 @@ d = new Date();
 var filsename = d.yyyymmdd();
 
 
-function Excelexport() {
-    alert('OK');
-    $('#table2excel').tableExport({type: 'excel', escape: 'false'});
-}
-
-
 
 myApp.controller("homeController", function ($scope, $http) {
 
@@ -38,6 +32,26 @@ myApp.controller("homeController", function ($scope, $http) {
             .error(function () {
                 alert(ไม่สามารถประมวลผลข้อมูลได้);
             });
+            
+    
+ //start charts   
+    $scope.highchartsNG = {
+        options: {
+            chart: {
+                type: 'bar'
+            }
+        },
+        series: [{
+            data: [10, 15, 12, 8, 7]
+        }],
+        title: {
+            text: 'Hello'
+        },
+        loading: false
+    }            
+  //end charts              
+            
+            
 })
 
 
