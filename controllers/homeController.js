@@ -32,50 +32,87 @@ myApp.controller("homeController", function ($scope, $http) {
             .error(function () {
                 alert(ไม่สามารถประมวลผลข้อมูลได้);
             });
-            
-    
- //start charts   
-    $scope.highchartsNG = {
-        options: {
-            chart: {
-                type: 'pie'
-            }
-        },
-        series: [{
-                        data: [{
-                name: 'Microsoft Internet Explorer',
-                y: 56.33,
-                drilldown: 'Microsoft Internet Explorer'
-            }, {
-                name: 'Chrome',
-                y: 24.03,
-                drilldown: 'Chrome'
-            }, {
-                name: 'Firefox',
-                y: 10.38,
-                drilldown: 'Firefox'
-            }, {
-                name: 'Safari',
-                y: 4.77,
-                drilldown: 'Safari'
-            }, {
-                name: 'Opera',
-                y: 0.91,
-                drilldown: 'Opera'
-            }, {
-                name: 'Proprietary or Undetectable',
-                y: 0.2,
-                drilldown: null
-            }]
-        }],
-        title: {
-            text: 'Hello'
-        },
-        loading: false
-    }            
-  //end charts              
-            
-            
+
+    $http.get('dataService/m_pop_charts.php')
+            .success(function (response) {
+                $scope.chartdata = response;
+
+                var title = $scope.chartdata[0]['name'];
+                var cat = [];
+                for (var i = 0; i < $scope.chartdata.length; i++) {
+                    cat.push($scope.chartdata[i]['name']);
+                }
+
+                var data = [];
+                for (var i = 0; i < $scope.chartdata.length; i++) {
+                    data.push(parseInt($scope.chartdata[i]['y']));
+                }
+                //d.push(data)
+
+                Highcharts.setOptions({
+                    lang: {
+                        decimalPoint: '.',
+                        thousandsSep: ','
+                    }
+                });
+                //start charts   
+                $scope.highchartsNG = {
+                    options: {
+                        chart: {
+                            type: 'column'
+                        },
+                        xAxis: {
+                            categories: cat,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'จำนวน (คน)'
+                            }
+
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:14px">อำเภอ{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                    '<td style="padding:0"><b>{point.y:,.0f} คน</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                    },
+                    title: {
+                        text: 'จำนวนผู้สูงอายุในจังหวัดอุทัยธานี'
+                    },
+                            subtitle: {
+                     text: 'จำนวนผู้สูงอายุจังหวัดอุทัยธานี (เฉพาะอาศัยอยู่จริงแยกรายอำเภอ) ที่มา:ฐานข้อมูล Datacenter สสจ.อุทัยธานี'
+                     },
+                     
+                    series: [{
+                            name: 'จำนวนผู้สูงอายุ',
+                            colorByPoint: true,
+                            data: data
+                        }],
+                    loading: false
+
+                }
+                //end charts    
+
+
+
+            })
+            .error(function () {
+                alert(ไม่สามารถประมวลผลข้อมูลได้);
+            });
+
+
+
+
+
+
+
+
+
 })
 
 
