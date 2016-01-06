@@ -4,28 +4,24 @@
 <p class="description">
     ระบบสารสนเทศ การดูแลสุขภาพระยะยาว
 </p>
-<div class="flex-grid"  ng-controller="homeController">
+<div class="flex-grid" ng-controller="homeController">
     <div class="row cell-auto-size">
-        <div class="cell colspan16" style="padding: 5px;">
-            <highchart id="chart1" config="highchartsNG"></highchart>   
-        </div>
-    </div>
-</div>
-<div class="flex-grid">
-    <div class="row cell-auto-size">
-        <div class="cell colspan6" style="padding: 5px;">
-            <div class="carousel" data-role="carousel" data-height="250" data-control-next="<span class='mif-chevron-right'></span>" data-control-prev="<span class='mif-chevron-left'></span>">
+        <div class="cell colspan12" style="padding: 5px;">
+            <div class="carousel" data-role="carousel"  data-height="200" data-control-next="<span class='mif-chevron-right'></span>" data-control-prev="<span class='mif-chevron-left'></span>">
                 <div class="slide"><img src="img/ltc1.jpg" data-role="fitImage" data-format="fill"></div>
                 <div class="slide"><img src="img/ltc2.jpg" data-role="fitImage" data-format="fill"></div>
             </div>
         </div>
-        <div class="cell colspan6">
-
-        </div>
     </div>
 
 </div>
-
+<div class="flex-grid"  ng-controller="homeController">
+    <div class="row cell-auto-size">
+        <div class="cell colspan12" style="padding: 5px;">
+            <highchart id="chart1" config="highchartsNG"></highchart>   
+        </div>
+    </div>
+</div>
 
 <!--
 <div class="panel" ng-controller="homeController">
