@@ -70,7 +70,40 @@ myApp.config(function ($routeProvider) {
                 }
 
             }
+    ).when(
+            "/blader_d/:id", {
+                templateUrl: "views/amplist/blader_older_d.html",
+                controller: function ($scope, $http, cupcode) {
 
+
+                    $scope.aaaa = function () {
+                        alert('OK');
+                    };
+                    $scope.dataloaded = false;
+                    $scope.cupcode = cupcode;
+                    $http.get('dataService/m_gastric_d.php?cupcode=' + $scope.cupcode)
+                            .success(function (response) {
+                                $scope.data = response.records;
+                                $scope.dataloaded = true;
+                            })
+                            .error(function () {
+                                alert(ไม่สามารถประมวลผลข้อมูลได้);
+
+                            });
+                    $scope.exportData = function () {
+                        var blob = new Blob([document.getElementById('exportable').innerHTML], {
+                            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+                        });
+                        saveAs(blob, "i-ltc-report-amp.xls");
+                    };
+                },
+                resolve: {
+                    cupcode: function ($route) {
+                        return $route.current.params.id;
+                    }
+                }
+
+            }
     ).when(
             "/depress_older_d/:id", {
                 templateUrl: "views/amplist/depression_older_d.html",

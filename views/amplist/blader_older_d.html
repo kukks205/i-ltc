@@ -1,13 +1,14 @@
-<div class="flex-grid demo-grid" ng-controller="gastricController">
+<div class="flex-grid demo-grid">
     <div class="row cell-auto-size">
         <div class="cell colspan12">
             <h4> <small></small></h4>
             <blockquote>
-                <h4>ผู้สูงอายุที่ได้รับการคัดกรองปัญหาการกลั้นปัสสาวะ จำแนกตามผลการคัดกรองและอำเภอ</h4>
+                <h4>ผู้สูงอายุที่ได้รับการคัดกรองปัญหาการกลั้นปัสสาวะ ในเขตอำเภอ{{data[0]['ampname']}}</h4>
                 <small>ประมวลผลล่าสุดเมื่อ {{data[0]['last_calc']}}</small>
             </blockquote>
             <div class="clearfix"></div>
             <div class="align-right">
+                <a href="#/blader_amp" class="button success"><i class="icon mif-chevron-left"></i> กลับ</a>
                 <button class="image-button success" ng-click="exportData();">
                     Excel
                     <span class="icon mif-file-excel bg-darkGreen"></span>
@@ -21,7 +22,7 @@
             <table id="example" class="table striped hovered cell-hovered border bordered" width="100%">
                 <thead>
                     <tr>
-                        <th rowspan="3" class="v-align-middle">อำเภอ</th>
+                        <th rowspan="3" class="v-align-middle">หน่วยบริการ</th>
                         <th rowspan="3">ผู้สุงอายุเฉพาะอยู่จริง(คน)</th>
                         <th rowspan="3">คัดกรอง</th>
                         <th rowspan="3">%</th>
@@ -41,10 +42,7 @@
                 <tbody>
                     <tr ng-repeat="o in data">
                         <td>
-                            <div ng-if="o.amp == 0" >{{o.name}}</div>
-                            <div ng-if="o.amp > 0">
-                                <a ng-href="#/blader_d/{{o.amp}}">{{o.name}}</a>
-                            </div>
+                            {{o.hospname}}
                         </td>
                         <td align="center">{{o.pop_old|number}}</td>
                         <td align="center">
@@ -57,13 +55,19 @@
                             <div ng-if="o.t1 < 1">0</div>
                             <div ng-if="o.t1 > 0">{{o.t1|number}}</div>    
                         </td>
-                        <td align="center">{{(o.t1 * 100)/o.t0| number:2 }}</td>
+                        <td align="center">
+                            <div ng-if="o.t0 < 1">N/A</div>
+                            <div ng-if="o.t0 > 0">{{(o.t1 * 100)/o.t0| number:2 }}</div>
+                        </td>
                         
                         <td align="center">
                             <div ng-if="o.t2 < 1">0</div>
                             <div ng-if="o.t2 > 0">{{o.t2|number}}</div>                            
                         </td>
-                        <td align="center">{{(o.t2 * 100)/o.t0| number:2 }}</td>
+                        <td align="center">
+                            <div ng-if="o.t0 < 1">N/A</div>
+                            <div ng-if="o.t0 > 0">{{(o.t2 * 100)/o.t0| number:2 }}</div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
