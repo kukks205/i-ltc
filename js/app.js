@@ -22,6 +22,11 @@ myApp.config(function ($routeProvider) {
                 templateUrl: "views/data_adl_older.html"
             }
     ).when(
+            "/blader_amp", {
+                //controller: "olderController",
+                templateUrl: "views/data_blader_older.html"
+            }                    
+    ).when(
             "/depress_amp", {
                 //controller: "olderController",
                 templateUrl: "views/data_depression_older.html"

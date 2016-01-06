@@ -88,6 +88,28 @@ myApp.controller("depressionController", function ($scope, $http) {
 
 })
 
+myApp.controller("gastricController", function ($scope, $http) {
+
+    $scope.exportData = function () {
+        var blob = new Blob([document.getElementById('exportable').innerHTML], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+        });
+        saveAs(blob, "i-ltc-report-gastric.xls");
+    };
+
+    $scope.dataloaded = false;
+    $http.get('dataService/m_gastric.php')
+            .success(function (response) {
+                $scope.data = response.records;
+                $scope.dataloaded = true;
+            })
+            .error(function () {
+                alert(ไม่สามารถประมวลผลข้อมูลได้);
+
+            });
+
+})
+
 
 
 /*myApp.controller("olderDController", function ($stateParams,$scope,$http) {
