@@ -9,7 +9,7 @@
             <div class="clearfix"></div>
             <div class="align-right">
                 <a href="#/adl_amp" class="button success"><i class="icon mif-chevron-left"></i> กลับ</a>
-                <button class="image-button success">
+                <button class="image-button success" ng-click="exportData();">
                     Excel
                     <span class="icon mif-file-excel bg-darkGreen"></span>
                 </button>
@@ -18,57 +18,58 @@
                     <span class="icon mif-printer bg-darkGreen"></span>
                 </button>
             </div>
-
-            <table id="example" class="table striped hovered cell-hovered border bordered" width="100%">
-                <thead>
-                    <tr>
-                        <th rowspan="3" class="v-align-middle">อำเภอ</th>
-                        <th rowspan="3">ผู้สุงอายุเฉพาะอยู่จริง(คน)</th>
-                        <th rowspan="3">คัดกรอง</th>
-                        <th rowspan="3">%</th>
-                        <th colspan="6">แบ่งตามสมรรถนะ</th>
-                    </tr>
-                    <tr>
-                        <th colspan="2">ติดสังคม</th>
-                        <th colspan="2">ติดบ้าน</th>
-                        <th colspan="2">ติดเตียง</th>
-                    </tr>
-                    <tr>
-                        <th>จำนวน</th>
-                        <th>%</th>
-                        <th>จำนวน</th>
-                        <th>%</th>
-                        <th>จำนวน</th>
-                        <th>%</th>
-                    </tr>
-                </thead>
-            <tbody>
-                <tr ng-repeat="o in older">
-                    <td>{{o.hospname}}</td>
-                    <td align="center">{{o.pop_old|number}}</td>
-                    <td align="center">
-                        <div ng-if="o.t0<1">0</div>
-                        <div ng-if="o.t0>0">{{o.t0|number}}</div>      
-                    </td>
-                    <td align="center">{{(o.t0*100)/o.pop_old|number:2}}</td>
-                    <td align="center">
-                        <div ng-if="o.t1<1">0</div>
-                        <div ng-if="o.t1>0">{{o.t1|number}}</div>    
-                    </td>
-                    <td align="center">{{(o.t1 * 100)/o.pop_old| number:2 }}</td>
-                    <td align="center">
-                        <div ng-if="o.t2<1">0</div>
-                        <div ng-if="o.t2>0">{{o.t2|number}}</div>                            
-                    </td>
-                    <td align="center">{{(o.t2 * 100)/o.pop_old| number:2 }}</td>
-                    <td align="center">
-                        <div ng-if="o.t3<1">0</div>
-                        <div ng-if="o.t3>0">{{o.t3|number}}</div>                            
-                    </td>
-                    <td align="center">{{(o.t3 * 100)/o.pop_old| number:2 }}</td>
-                </tr>
-            </tbody>
-            </table>
+            <div id="exportable">
+                <table id="example" class="table striped hovered cell-hovered border bordered" width="100%">
+                    <thead>
+                        <tr>
+                            <th rowspan="3" class="v-align-middle">อำเภอ</th>
+                            <th rowspan="3">ผู้สุงอายุเฉพาะอยู่จริง(คน)</th>
+                            <th rowspan="3">คัดกรอง</th>
+                            <th rowspan="3">%</th>
+                            <th colspan="6">แบ่งตามสมรรถนะ</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">ติดสังคม</th>
+                            <th colspan="2">ติดบ้าน</th>
+                            <th colspan="2">ติดเตียง</th>
+                        </tr>
+                        <tr>
+                            <th>จำนวน</th>
+                            <th>%</th>
+                            <th>จำนวน</th>
+                            <th>%</th>
+                            <th>จำนวน</th>
+                            <th>%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="o in older">
+                            <td>{{o.hospname}}</td>
+                            <td align="center">{{o.pop_old|number}}</td>
+                            <td align="center">
+                                <div ng-if="o.t0 < 1">0</div>
+                                <div ng-if="o.t0 > 0">{{o.t0|number}}</div>      
+                            </td>
+                            <td align="center">{{(o.t0 * 100)/o.pop_old|number:2}}</td>
+                            <td align="center">
+                                <div ng-if="o.t1 < 1">0</div>
+                                <div ng-if="o.t1 > 0">{{o.t1|number}}</div>    
+                            </td>
+                            <td align="center">{{(o.t1 * 100)/o.pop_old| number:2 }}</td>
+                            <td align="center">
+                                <div ng-if="o.t2 < 1">0</div>
+                                <div ng-if="o.t2 > 0">{{o.t2|number}}</div>                            
+                            </td>
+                            <td align="center">{{(o.t2 * 100)/o.pop_old| number:2 }}</td>
+                            <td align="center">
+                                <div ng-if="o.t3 < 1">0</div>
+                                <div ng-if="o.t3 > 0">{{o.t3|number}}</div>                            
+                            </td>
+                            <td align="center">{{(o.t3 * 100)/o.pop_old| number:2 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div ng-hide="dataloaded == true" align='center'>
                 <span style='padding-left: 45px;'><i data-role="preloader" data-type="ring"  data-style="color"></i><small>กำลังประมวลผล....</small></span>
                 <!--<i class="ion-loading-c" style="font-size: 32px;"></i>กำลังประมวลผล...-->

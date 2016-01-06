@@ -1,23 +1,23 @@
-<div class="flex-grid demo-grid" ng-controller="homeController">
+<div class="flex-grid demo-grid" ng-controller="olderController">
     <div class="row cell-auto-size">
         <div class="cell colspan12">
             <h4> <small></small></h4>
             <blockquote>
-                <h4>ผู้สูงอายุที่ได้รับการคัดกรอง Bartel ADL จำแนกตามสมรรถนะและอำเภอ</h4>
+                <h4>ผู้สูงอายุที่ได้รับการคัดกรอง Barthel ADL จำแนกตามสมรรถนะและอำเภอ</h4>
                 <small>ประมวลผลล่าสุดเมื่อ {{older[0]['last_calc']}}</small>
             </blockquote>
             <div class="clearfix"></div>
             <div class="align-right">
-                <button class="image-button success">
+                <button class="image-button success" ng-click="exportData();">
                     Excel
                     <span class="icon mif-file-excel bg-darkGreen"></span>
-                </button>
+                </button> 
                 <button class="image-button success">
                     Print
                     <span class="icon mif-printer bg-darkGreen"></span>
                 </button>
             </div>
-
+            <div id="exportable">
             <table id="example" class="table striped hovered cell-hovered border bordered" width="100%">
                 <thead>
                     <tr>
@@ -73,7 +73,7 @@
                     </tr>
                 </tbody>
             </table>
-
+</div>
 
 
 

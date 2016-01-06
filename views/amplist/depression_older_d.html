@@ -9,15 +9,18 @@
             <div class="clearfix"></div>
             <div class="align-right">
                 <a href="#/depress_amp" class="button success"><i class="icon mif-chevron-left"></i> กลับ</a>
-                <button class="image-button success">
+                <button class="image-button success" ng-click="exportData();">
                     Excel
                     <span class="icon mif-file-excel bg-darkGreen"></span>
-                </button>
+                </button>  
+                
                 <button class="image-button success">
                     Print
                     <span class="icon mif-printer bg-darkGreen"></span>
                 </button>
             </div>
+            
+            <div id="exportable">
             <table id="example" class="table striped hovered cell-hovered border bordered" width="100%">
                 <thead>
                     <tr>
@@ -94,7 +97,7 @@
                     </tr>
                 </tbody>
             </table>
-
+            </div>
 
             <div ng-hide="dataloaded == true">
                 <span style='padding-left: 45px;'><i data-role="preloader" data-type="ring"  data-style="color"></i><small>กำลังประมวลผล....</small></span>

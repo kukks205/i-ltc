@@ -25,7 +25,7 @@ myApp.config(function ($routeProvider) {
             "/depress_amp", {
                 //controller: "olderController",
                 templateUrl: "views/data_depression_older.html"
-            }                    
+            }
     ).when(
             "/pop_older1", {
                 //controller: "olderController",
@@ -35,6 +35,11 @@ myApp.config(function ($routeProvider) {
             "/pop_older_d/:id", {
                 templateUrl: "views/amplist/pop_older_d.html",
                 controller: function ($scope, $http, cupcode) {
+
+
+                    $scope.aaaa = function () {
+                        alert('OK');
+                    };
                     $scope.dataloaded = false;
                     $scope.cupcode = cupcode;
                     $http.get('dataService/m_pop_older_d.php?cupcode=' + $scope.cupcode)
@@ -46,6 +51,12 @@ myApp.config(function ($routeProvider) {
                                 alert(ไม่สามารถประมวลผลข้อมูลได้);
 
                             });
+                    $scope.exportData = function () {
+                        var blob = new Blob([document.getElementById('exportable').innerHTML], {
+                            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+                        });
+                        saveAs(blob, "pop-older-amp.xls");
+                    };
                 },
                 resolve: {
                     cupcode: function ($route) {
@@ -54,11 +65,18 @@ myApp.config(function ($routeProvider) {
                 }
 
             }
-                    
+
     ).when(
             "/depress_older_d/:id", {
                 templateUrl: "views/amplist/depression_older_d.html",
                 controller: function ($scope, $http, cupcode) {
+                    $scope.exportData = function () {
+                        var blob = new Blob([document.getElementById('exportable').innerHTML], {
+                            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+                        });
+                        saveAs(blob, "depression-older-amp.xls");
+                    };
+
                     $scope.dataloaded = false;
                     $scope.cupcode = cupcode;
                     $http.get('dataService/m_depression_d.php?cupcode=' + $scope.cupcode)
@@ -77,12 +95,19 @@ myApp.config(function ($routeProvider) {
                     }
                 }
 
-            }                    
+            }
 
-                ).when(
+    ).when(
             "/adl_older_d/:id", {
                 templateUrl: "views/amplist/adl_older_d.html",
                 controller: function ($scope, $http, cupcode) {
+                    $scope.exportData = function () {
+                        var blob = new Blob([document.getElementById('exportable').innerHTML], {
+                            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+                        });
+                        saveAs(blob, "barthel-adl-older-amp.xls");
+                    };
+
                     $scope.dataloaded = false;
                     $scope.cupcode = cupcode;
                     $http.get('dataService/m_pop_older_d.php?cupcode=' + $scope.cupcode)
@@ -102,15 +127,15 @@ myApp.config(function ($routeProvider) {
                 }
 
             }
-    ).when(
-            "/about", {
-                controller: "aboutController",
-                templateUrl: "views/about.html"
-            }
-    ).otherwise({
-        redirectTo: '/home'
-    });
-})
+            ).when(
+                    "/about", {
+                        controller: "aboutController",
+                        templateUrl: "views/about.html"
+                    }
+            ).otherwise({
+                redirectTo: '/home'
+            });
+        })
 
 
 myApp.controller("customerController", function ($scope) {
