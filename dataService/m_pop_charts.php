@@ -3,8 +3,8 @@
 
 include 'includes/conf.ini.php';
 include 'includes/DBConn.php';
-$row = $db->prepare("select p.ampname as name,sum(p.pop_old) as y,p.amp as drilldown 
-    from ltc_pop_older_d as p group by p.amp");
+$row = $db->prepare("select p.ampname as name,p.amp as drilldown,sum(p.pop_all) as p_all,
+sum(p.pop_old) as p_old from ltc_pop_older_d as p group by p.amp");
 
 $row->execute(); //execute the query  
 $data = $row->fetchAll(PDO::FETCH_ASSOC);

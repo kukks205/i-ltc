@@ -37,15 +37,13 @@ myApp.controller("homeController", function ($scope, $http) {
             .success(function (response) {
                 $scope.chartdata = response;
 
-                var title = $scope.chartdata[0]['name'];
                 var cat = [];
+                var dataa = [];
+                var datao = [];
                 for (var i = 0; i < $scope.chartdata.length; i++) {
                     cat.push($scope.chartdata[i]['name']);
-                }
-
-                var data = [];
-                for (var i = 0; i < $scope.chartdata.length; i++) {
-                    data.push(parseInt($scope.chartdata[i]['y']));
+                    dataa.push(parseInt($scope.chartdata[i]['p_all']));
+                    datao.push(parseInt($scope.chartdata[i]['p_old']));
                 }
                 //d.push(data)
 
@@ -74,24 +72,59 @@ myApp.controller("homeController", function ($scope, $http) {
                         },
                         tooltip: {
                             headerFormat: '<span style="font-size:14px">อำเภอ{point.key}</span><table>',
-                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            pointFormat: '<tr><td style="color:{series.color};padding:0"><b>{series.name}:</b> </td>' +
                                     '<td style="padding:0"><b>{point.y:,.0f} คน</b></td></tr>',
                             footerFormat: '</table>',
                             shared: true,
                             useHTML: true
                         },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.1,
+                                borderWidth: 0
+                            }
+                        },
                     },
                     title: {
                         text: 'จำนวนผู้สูงอายุในจังหวัดอุทัยธานี'
                     },
-                            subtitle: {
-                     text: 'จำนวนผู้สูงอายุจังหวัดอุทัยธานี (เฉพาะอาศัยอยู่จริงแยกรายอำเภอ) ที่มา:ฐานข้อมูล Datacenter สสจ.อุทัยธานี'
-                     },
-                     
+                    subtitle: {
+                        text: 'จำนวนผู้สูงอายุจังหวัดอุทัยธานี (เฉพาะอาศัยอยู่จริงแยกรายอำเภอ) ที่มา:ฐานข้อมูล Datacenter สสจ.อุทัยธานี'
+                    },
                     series: [{
+                            name: 'ประชากรทั้งหมด',
+                            //colorByPoint: true,
+                            color: '#2ECCFA',
+                            data: dataa,
+                            dataLabels: {
+                                enabled: true,
+                                rotation: -90,
+                                color: '#FFFFFF',
+                                //align: 'left',
+                                format: '{point.y:,.0f}', // one decimal
+                                y: 22, // 10 pixels down from the top
+                                style: {
+                                    fontSize: '10px',
+                                    fontFamily: 'Verdana, sans-serif'
+                                }
+                            }
+                        }, {
                             name: 'จำนวนผู้สูงอายุ',
-                            colorByPoint: true,
-                            data: data
+                            //colorByPoint: true,
+                            color: '#FA58F4',
+                            data: datao,
+                            dataLabels: {
+                                enabled: true,
+                                rotation: -90,
+                                color: '#FFFFFF',
+                               // align: 'left',
+                                format: '{point.y:,.0f}', // one decimal
+                                y: 5, // 10 pixels down from the top
+                                style: {
+                                    fontSize: '10px',
+                                    fontFamily: 'Verdana, sans-serif'
+                                }
+                            }
                         }],
                     loading: false
 
