@@ -117,7 +117,7 @@ myApp.controller("homeController", function ($scope, $http) {
                                 enabled: true,
                                 rotation: -90,
                                 color: '#FFFFFF',
-                               // align: 'left',
+                                // align: 'left',
                                 format: '{point.y:,.0f}', // one decimal
                                 y: 5, // 10 pixels down from the top
                                 style: {
@@ -210,8 +210,7 @@ myApp.controller("homeController", function ($scope, $http) {
                             //colorByPoint: true,
                             //color: '#FA58F4',
                             data: data3
-                        },
-                    , {
+                        },{
                             name: '90ปีขึ้นไป',
                             //colorByPoint: true,
                             //color: '#FA58F4',
@@ -252,8 +251,82 @@ myApp.controller("olderController", function ($scope, $http) {
     $http.get('dataService/m_home.php')
             .success(function (response) {
                 $scope.older = response.records;
-                //กำหนดตัวแปรที่จะแสดงสถานะการ load ว่าเสร็จแล้ว
                 $scope.dataloaded = true;
+
+                var cat = [];
+                var data1 = [];
+                var data2 = [];
+                var data3 = [];
+                for (var i = 0; i < $scope.older.length; i++) {
+                    cat.push($scope.older[i]['name']);
+                    data1.push(parseInt($scope.older[i]['t1']));
+                    data2.push(parseInt($scope.older[i]['t2']));
+                    data3.push(parseInt($scope.older[i]['t3']));
+                }
+                //d.push(data)
+                
+                //start charts   
+                $scope.olderADLChart = {
+                    options: {
+                        chart: {
+                            type: 'column'
+                        },
+                        xAxis: {
+                            categories: cat,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'จำนวน (คน)'
+                            }
+
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:14px">อำเภอ{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0"><b>{series.name}:</b> </td>' +
+                                    '<td style="padding:0"><b>{point.y:,.0f} คน</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                //stacking: 'percent',
+                                pointPadding: 0.05,
+                                borderWidth: 0
+                            }
+                        },
+                    },
+                    title: {
+                        text: 'จำนวนผู้สูงอายุแบ่งตามประเภทเตียงในจังหวัดอุทัยธานี'
+                    },
+                    subtitle: {
+                        text: 'จำนวนผู้สูงอายุแบ่งตามประเภทเตียงในจังหวัดอุทัยธานี จำแนกตามอำเภอ ที่มา:ฐานข้อมูล Datacenter สสจ.อุทัยธานี'
+                    },
+                    series: [{
+                            name: 'เตียง 1',
+                            //colorByPoint: true,
+                            color: '#00af00',
+                            data: data1
+                        }, {
+                            name: 'เตียง 2',
+                            //colorByPoint: true,
+                            color: '#ffcc00',
+                            data: data2
+                        }, {
+                            name: 'เตียง 3',
+                            //colorByPoint: true,
+                            color: '#d20000',
+                            data: data3
+                        }],
+                    loading: false
+
+                }
+                //end charts                   
+                
+                
+
 
             })
             .error(function () {
@@ -261,6 +334,8 @@ myApp.controller("olderController", function ($scope, $http) {
             });
 
 })
+
+
 
 myApp.controller("depressionController", function ($scope, $http) {
 
