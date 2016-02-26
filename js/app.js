@@ -148,7 +148,7 @@ myApp.config(function ($routeProvider) {
 
                     $scope.dataloaded = false;
                     $scope.cupcode = cupcode;
-                    $http.get('dataService/m_pop_older_d.php?cupcode=' + $scope.cupcode)
+                    $http.get('dataService/m_gastric_d.php?cupcode=' + $scope.cupcode)
                             .success(function (response) {
                                 $scope.older = response.records;
                                 $scope.dataloaded = true;

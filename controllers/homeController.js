@@ -374,6 +374,84 @@ myApp.controller("gastricController", function ($scope, $http) {
             .success(function (response) {
                 $scope.data = response.records;
                 $scope.dataloaded = true;
+                
+                
+                                var cat = [];
+                var data1 = [];
+                var data2 = [];
+                var data3 = [];
+                for (var i = 0; i < $scope.data.length; i++) {
+                    cat.push($scope.data[i]['name']);
+                    data1.push(parseInt($scope.data[i]['at1']));
+                    data2.push(parseInt($scope.data[i]['at2']));
+                    data3.push(parseInt($scope.data[i]['at3']));
+                }
+                //d.push(data)
+
+                //start charts   
+                $scope.olderADLChart = {
+                    options: {
+                        chart: {
+                            type: 'column'
+                        },
+                        xAxis: {
+                            categories: cat,
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'จำนวน (คน)'
+                            }
+
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:14px">อำเภอ{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0"><b>{series.name}:</b> </td>' +
+                                    '<td style="padding:0"><b>{point.y:.0f} คน</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                //stacking: 'percent',
+                                pointPadding: 0.05,
+                                borderWidth: 0
+                            }
+                        },
+                    },
+                    title: {
+                        text: 'จำนวนผู้สูงอายุแบ่งตามประเภทเตียงในจังหวัดอุทัยธานี'
+                    },
+                    subtitle: {
+                        text: 'จำนวนผู้สูงอายุแบ่งตามประเภทเตียงในจังหวัดอุทัยธานี จำแนกตามอำเภอ ที่มา:ฐานข้อมูล Datacenter สสจ.อุทัยธานี'
+                    },
+                    series: [{
+                            name: 'เตียง 1',
+                            //colorByPoint: true,
+                            color: '#00af00',
+                            data: data1
+                        }, {
+                            name: 'เตียง 2',
+                            //colorByPoint: true,
+                            color: '#ffcc00',
+                            data: data2
+                        }, {
+                            name: 'เตียง 3',
+                            //colorByPoint: true,
+                            color: '#d20000',
+                            data: data3
+                        }],
+                    loading: false
+
+                }
+                //end charts                   
+
+                
+                
+                
+                
             })
             .error(function () {
                 alert(ไม่สามารถประมวลผลข้อมูลได้);
@@ -381,6 +459,10 @@ myApp.controller("gastricController", function ($scope, $http) {
             });
 
 })
+
+
+
+
 
 
 

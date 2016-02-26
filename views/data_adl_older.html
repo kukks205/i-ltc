@@ -1,10 +1,10 @@
-<div class="flex-grid demo-grid" ng-controller="olderController">
+<div class="flex-grid demo-grid" ng-controller="gastricController">
     <div class="row cell-auto-size">
         <div class="cell colspan12">
             <h4> <small></small></h4>
             <blockquote>
                 <h4>ผู้สูงอายุที่ได้รับการคัดกรอง Barthel ADL จำแนกตามสมรรถนะและอำเภอ</h4>
-                <small>ประมวลผลล่าสุดเมื่อ {{older[0]['last_calc']}}</small>
+                <small>ประมวลผลล่าสุดเมื่อ {{data[0]['last_calc']}}</small>
             </blockquote>
             <div class="clearfix"></div>
             <div class="align-right">
@@ -42,7 +42,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="o in older">
+                        <tr ng-repeat="o in data">
                             <td>
                                 <div ng-if="o.amp == 0" >{{o.name}}</div>
                                 <div ng-if="o.amp > 0">
@@ -50,26 +50,28 @@
                                 </div>
                             </td>
                             <td align="center">{{o.pop_old|number}}</td>
+                           
                             <td align="center">
                                 <div ng-if="o.t0 < 1">0</div>
                                 <div ng-if="o.t0 > 0">{{o.t0|number}}</div>      
                             </td>
                             <td align="center">{{(o.t0 * 100)/o.pop_old|number:2}}</td>
+                            
                             <td align="center">
-                                <div ng-if="o.t1 < 1">0</div>
-                                <div ng-if="o.t1 > 0">{{o.t1|number}}</div>    
+                                <div ng-if="o.at1 < 1">0</div>
+                                <div ng-if="o.at1 > 0">{{o.at1|number}}</div>    
                             </td>
-                            <td align="center">{{(o.t1 * 100)/o.pop_old| number:2 }}</td>
+                            <td align="center">{{(o.at1 * 100)/o.pop_old| number:2 }}</td>
                             <td align="center">
-                                <div ng-if="o.t2 < 1">0</div>
-                                <div ng-if="o.t2 > 0">{{o.t2|number}}</div>                            
+                                <div ng-if="o.at2 < 1">0</div>
+                                <div ng-if="o.at2 > 0">{{o.at2|number}}</div>                            
                             </td>
-                            <td align="center">{{(o.t2 * 100)/o.pop_old| number:2 }}</td>
+                            <td align="center">{{(o.at2 * 100)/o.pop_old| number:2 }}</td>
                             <td align="center">
-                                <div ng-if="o.t3 < 1">0</div>
-                                <div ng-if="o.t3 > 0">{{o.t3|number}}</div>                            
+                                <div ng-if="o.at3 < 1">0</div>
+                                <div ng-if="o.at3 > 0">{{o.at3|number}}</div>                            
                             </td>
-                            <td align="center">{{(o.t3 * 100)/o.pop_old| number:2 }}</td>
+                            <td align="center">{{(o.at3 * 100)/o.pop_old| number:2 }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -85,7 +87,7 @@
     </div>
 </div>
 
-<div class="flex-grid"  ng-controller="olderController">
+<div class="flex-grid"  ng-controller="gastricController">
     <div class="row cell-auto-size">
         <div class="cell colspan12" style="padding: 5px;">
             <highchart id="chart1" config="olderADLChart"></highchart>   
