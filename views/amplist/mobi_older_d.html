@@ -1,0 +1,84 @@
+<div class="flex-grid demo-grid">
+    <div class="row cell-auto-size">
+        <div class="cell colspan12">
+            <h4> <small></small></h4>
+            <blockquote>
+                <h4>ผู้สูงอายุที่ได้รับการคัดกรองภาวะหกล้ม ในเขตอำเภอ{{data[0]['ampname']}}</h4>
+                <small>ประมวลผลล่าสุดเมื่อ {{data[0]['last_calc']}}</small>
+            </blockquote>
+            <div class="clearfix"></div>
+            <div class="align-right">
+                <a href="#/blader_amp" class="button success"><i class="icon mif-chevron-left"></i> กลับ</a>
+                <button class="image-button success" ng-click="exportData();">
+                    Excel
+                    <span class="icon mif-file-excel bg-darkGreen"></span>
+                </button> 
+                <button class="image-button success">
+                    Print
+                    <span class="icon mif-printer bg-darkGreen"></span>
+                </button>
+            </div>
+            <div id="exportable">
+            <table id="example" class="table striped hovered cell-hovered border bordered" width="100%">
+                <thead>
+                    <tr>
+                        <th rowspan="3" class="v-align-middle">หน่วยบริการ</th>
+                        <th rowspan="3">ผู้สุงอายุเฉพาะอยู่จริง(คน)</th>
+                        <th rowspan="3">คัดกรอง</th>
+                        <th rowspan="3">%</th>
+                        <th colspan="4">ภาวะหกล้ม</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">ไม่เสี่ยง</th>
+                        <th colspan="2">เสี่ยง</th>
+                    </tr>
+                    <tr>
+                        <th>จำนวน</th>
+                        <th>%</th>
+                        <th>จำนวน</th>
+                        <th>%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="o in data">
+                        <td>
+                            {{o.hospname}}
+                        </td>
+                        <td align="center">{{o.pop_old|number}}</td>
+                        <td align="center">
+                            <div ng-if="o.t0 < 1">0</div>
+                            <div ng-if="o.t0 > 0">{{o.t0|number}}</div>      
+                        </td>
+                        <td align="center">{{(o.t0 * 100)/o.pop_old|number:2}}</td>
+                        
+                        <td align="center">
+                            <div ng-if="o.t3 < 1">0</div>
+                            <div ng-if="o.t3 > 0">{{o.t3|number}}</div>    
+                        </td>
+                        <td align="center">
+                            <div ng-if="o.t3 < 1">N/A</div>
+                            <div ng-if="o.t3 > 0">{{(o.t3 * 100)/o.t0| number:2 }}</div>
+                        </td>
+                        
+                        <td align="center">
+                            <div ng-if="o.t4 < 1">0</div>
+                            <div ng-if="o.t4 > 0">{{o.t4|number}}</div>                            
+                        </td>
+                        <td align="center">
+                            <div ng-if="o.t4 < 1">N/A</div>
+                            <div ng-if="o.t4 > 0">{{(o.t4 * 100)/o.t0| number:2 }}</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+</div>
+
+
+
+            <div ng-hide="dataloaded == true" align='center'>
+                <span style='padding-left: 45px;'><i data-role="preloader" data-type="ring"  data-style="color"></i><small>กำลังประมวลผล....</small></span>
+                <!--<i class="ion-loading-c" style="font-size: 32px;"></i>กำลังประมวลผล...-->
+            </div>
+        </div>
+    </div>
+</div>
