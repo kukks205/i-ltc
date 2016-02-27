@@ -360,6 +360,30 @@ myApp.controller("depressionController", function ($scope, $http) {
 
 })
 
+
+
+myApp.controller("oksScreenController", function ($scope, $http) {
+
+    $scope.exportData = function () {
+        var blob = new Blob([document.getElementById('exportable').innerHTML], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+        });
+        saveAs(blob, "oks-older.xls");
+    };
+
+    $scope.dataloaded = false;
+    $http.get('dataService/m_oks.php')
+            .success(function (response) {
+                $scope.data = response.records;
+                $scope.dataloaded = true;
+            })
+            .error(function () {
+                alert(ไม่สามารถประมวลผลข้อมูลได้);
+
+            });
+
+})
+
 myApp.controller("gastricController", function ($scope, $http) {
 
     $scope.exportData = function () {

@@ -30,7 +30,13 @@ myApp.config(function ($routeProvider) {
             "/mobi_amp", {
                 //controller: "olderController",
                 templateUrl: "views/data_mobi_older.html"
-            }                    
+            }             
+    ).when(
+                "/oks_amp", {
+                //controller: "olderController",
+                templateUrl: "views/data_oks_older.html"
+            }
+                    
     ).when(
             "/depress_amp", {
                 //controller: "olderController",
@@ -121,6 +127,40 @@ myApp.config(function ($routeProvider) {
                     $scope.dataloaded = false;
                     $scope.cupcode = cupcode;
                     $http.get('dataService/m_gastric_d.php?cupcode=' + $scope.cupcode)
+                            .success(function (response) {
+                                $scope.data = response.records;
+                                $scope.dataloaded = true;
+                            })
+                            .error(function () {
+                                alert(ไม่สามารถประมวลผลข้อมูลได้);
+
+                            });
+                    $scope.exportData = function () {
+                        var blob = new Blob([document.getElementById('exportable').innerHTML], {
+                            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+                        });
+                        saveAs(blob, "i-ltc-report-amp.xls");
+                    };
+                },
+                resolve: {
+                    cupcode: function ($route) {
+                        return $route.current.params.id;
+                    }
+                }
+
+            }
+    ).when(
+            "/oks_d/:id", {
+                templateUrl: "views/amplist/oks_older_d.html",
+                controller: function ($scope, $http, cupcode) {
+
+
+                    $scope.aaaa = function () {
+                        alert('OK');
+                    };
+                    $scope.dataloaded = false;
+                    $scope.cupcode = cupcode;
+                    $http.get('dataService/m_oks_d.php?cupcode=' + $scope.cupcode)
                             .success(function (response) {
                                 $scope.data = response.records;
                                 $scope.dataloaded = true;

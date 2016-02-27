@@ -1,0 +1,104 @@
+<div class="flex-grid demo-grid" ng-controller="oksScreenController">
+    <div class="row cell-auto-size">
+        <div class="cell colspan12">
+            <h4> <small></small></h4>
+            <blockquote>
+                <h4>ผู้สูงอายุที่ได้รับการคัดกรองข้อเข่าเสื่อม  จำแนกตามผลการคัดกรองและอำเภอ</h4>
+                <small>ประมวลผลล่าสุดเมื่อ {{data[0]['last_calc']}}</small>
+            </blockquote>
+            <div class="clearfix"></div>
+            <div class="align-right">
+                <button class="image-button success" ng-click="exportData();">
+                    Excel
+                    <span class="icon mif-file-excel bg-darkGreen"></span>
+                </button> 
+                <button class="image-button success">
+                    Print
+                    <span class="icon mif-printer bg-darkGreen"></span>
+                </button>
+            </div>
+            <div id="exportable">
+                <table id="example" class="table striped hovered cell-hovered border bordered" width="100%">
+                    <thead>
+                        <tr>
+                            <th rowspan="3" class="v-align-middle">อำเภอ</th>
+                            <th rowspan="3">ผู้สุงอายุเฉพาะอยู่จริง(คน)</th>
+                            <th rowspan="3">คัดกรอง</th>
+                            <th rowspan="3">%</th>
+                            <th colspan="8">ผลการคัดกรอง</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">ปกติไม่มีอาการ</th>
+                            <th colspan="2">เริ่มมีอการข้อเข่าเสื่อม</th>
+                            <th colspan="2">ข้อเข่าเสื่อมปานกลาง</th>
+                            <th colspan="2">ข้อเข่าเสื่อมรุนแรง</th>
+                        </tr>
+                        <tr>
+                            <th>จำนวน</th>
+                            <th>%</th>
+                            <th>จำนวน</th>
+                            <th>%</th>
+                            <th>จำนวน</th>
+                            <th>%</th>
+                            <th>จำนวน</th>
+                            <th>%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="o in data">
+                            <td>
+                                <div ng-if="o.amp == 0" >{{o.name}}</div>
+                                <div ng-if="o.amp > 0">
+                                    <a ng-href="#/oks_d/{{o.amp}}">{{o.name}}</a>
+                                </div>
+                            </td>
+                            <td align="center">{{o.pop_old|number}}</td>
+                           
+                            <td align="center">
+                                <div ng-if="o.sc < 1">0</div>
+                                <div ng-if="o.sc > 0">{{o.sc|number}}</div>      
+                            </td>
+                            <td align="center">{{(o.sc * 100)/o.pop_old|number:2}}</td>
+                            
+                            <td align="center">
+                                <div ng-if="o.k0 < 1">0</div>
+                                <div ng-if="o.k0 > 0">{{o.k0|number}}</div>    
+                            </td>
+                            <td align="center">{{(o.k0 * 100)/o.sc| number:2 }}</td>
+                            <td align="center">
+                                <div ng-if="o.k1 < 1">0</div>
+                                <div ng-if="o.k1 > 0">{{o.k1|number}}</div>                            
+                            </td>
+                            <td align="center">{{(o.k1 * 100)/o.sc| number:2 }}</td>
+                            <td align="center">
+                                <div ng-if="o.k2 < 1">0</div>
+                                <div ng-if="o.k2 > 0">{{o.k2|number}}</div>                            
+                            </td>
+                            <td align="center">{{(o.k2 * 100)/o.sc| number:2 }}</td>
+                            <td align="center">
+                                <div ng-if="o.k3 < 1">0</div>
+                                <div ng-if="o.k3 > 0">{{o.k3|number}}</div>                            
+                            </td>
+                            <td align="center">{{(o.k3 * 100)/o.sc| number:2 }}</td>                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            <div ng-hide="dataloaded == true" align='center'>
+                <span style='padding-left: 45px;'><i data-role="preloader" data-type="ring"  data-style="color"></i><small>กำลังประมวลผล....</small></span>
+                <!--<i class="ion-loading-c" style="font-size: 32px;"></i>กำลังประมวลผล...-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="flex-grid"  ng-controller="gastricController">
+    <div class="row cell-auto-size">
+        <div class="cell colspan12" style="padding: 5px;">
+            <highchart id="chart1" config="olderADLChart"></highchart>   
+        </div>
+    </div>
+</div>-->
