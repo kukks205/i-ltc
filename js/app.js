@@ -1,4 +1,4 @@
-var myApp = angular.module("myApp", ["ngRoute","highcharts-ng"])
+var myApp = angular.module("myApp", ["ngRoute", "highcharts-ng"])
 
 myApp.config(function ($routeProvider) {
     $routeProvider.when(
@@ -25,18 +25,23 @@ myApp.config(function ($routeProvider) {
             "/blader_amp", {
                 //controller: "olderController",
                 templateUrl: "views/data_blader_older.html"
-            }                    
+            }
     ).when(
             "/mobi_amp", {
                 //controller: "olderController",
                 templateUrl: "views/data_mobi_older.html"
-            }             
+            }
     ).when(
-                "/oks_amp", {
+            "/amt_amp", {
+                //controller: "olderController",
+                templateUrl: "views/data_amt_older.html"
+            }
+    ).when(
+            "/oks_amp", {
                 //controller: "olderController",
                 templateUrl: "views/data_oks_older.html"
             }
-                    
+
     ).when(
             "/depress_amp", {
                 //controller: "olderController",
@@ -115,8 +120,42 @@ myApp.config(function ($routeProvider) {
                 }
 
             }
+                        ).when(
+            "/amt_d/:id", {
+                templateUrl: "views/amplist/amt_older_d.html",
+                controller: function ($scope, $http, cupcode) {
+
+
+                    $scope.aaaa = function () {
+                        alert('OK');
+                    };
+                    $scope.dataloaded = false;
+                    $scope.cupcode = cupcode;
+                    $http.get('dataService/m_amt_d.php?cupcode=' + $scope.cupcode)
+                            .success(function (response) {
+                                $scope.data = response.records;
+                                $scope.dataloaded = true;
+                            })
+                            .error(function () {
+                                alert(ไม่สามารถประมวลผลข้อมูลได้);
+
+                            });
+                    $scope.exportData = function () {
+                        var blob = new Blob([document.getElementById('exportable').innerHTML], {
+                            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+                        });
+                        saveAs(blob, "i-ltc-report-amt.xls");
+                    };
+                },
+                resolve: {
+                    cupcode: function ($route) {
+                        return $route.current.params.id;
+                    }
+                }
+
+            }
     ).when(
-                "/mobi_d/:id", {
+            "/mobi_d/:id", {
                 templateUrl: "views/amplist/mobi_older_d.html",
                 controller: function ($scope, $http, cupcode) {
 
@@ -244,15 +283,15 @@ myApp.config(function ($routeProvider) {
                 }
 
             }
-            ).when(
-                    "/about", {
-                        controller: "aboutController",
-                        templateUrl: "views/about.html"
-                    }
-            ).otherwise({
-                redirectTo: '/home'
-            });
-        })
+    ).when(
+            "/about", {
+                controller: "aboutController",
+                templateUrl: "views/about.html"
+            }
+    ).otherwise({
+        redirectTo: '/home'
+    });
+})
 
 
 myApp.controller("customerController", function ($scope) {

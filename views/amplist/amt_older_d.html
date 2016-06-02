@@ -1,0 +1,88 @@
+<div class="flex-grid demo-grid">
+    <div class="row cell-auto-size">
+        <div class="cell colspan12">
+            <h4> <small></small></h4>
+            <blockquote>
+                <h4>ผู้สูงอายุที่ได้รับการทดสอบสภาพสมอง(Abbreviated Mental Test:AMT) แยกหน่วยบริการในอำเภอ {{data[0]['Amphur_name']}}</h4>
+                <small>ประมวลผลล่าสุดเมื่อ {{data[0]['last_calc']}}</small>
+            </blockquote>
+            <div class="clearfix"></div>
+            <div class="align-right">
+                <a href="#/amt_amp" class="button success"><i class="icon mif-chevron-left"></i> กลับ</a>
+                <button class="image-button success" ng-click="exportData();">
+                    Excel
+                    <span class="icon mif-file-excel bg-darkGreen"></span>
+                </button> 
+                <button class="image-button success">
+                    Print
+                    <span class="icon mif-printer bg-darkGreen"></span>
+                </button>
+            </div>
+            <div id="exportable">
+            <table id="example" class="table striped hovered cell-hovered border bordered" width="100%">
+                <thead>
+                    <tr>
+                        <th rowspan="3" class="v-align-middle">หน่วยบริการ</th>
+                        <th rowspan="3">ผู้สุงอายุเฉพาะอยู่จริง(คน)</th>
+                        <th rowspan="3">คัดกรอง</th>
+                        <th rowspan="3">%</th>
+                        <th colspan="4">การทดสอบสภาพสมอง</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">ปกติ</th>
+                        <th colspan="2">ผิดปกติ</th>
+                    </tr>
+                    <tr>
+                        <th>จำนวน</th>
+                        <th>%</th>
+                        <th>จำนวน</th>
+                        <th>%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="o in data">
+                        <td>
+                            <div ng-if="o.hospcode == 0" >{{o.hospname}}</div>
+                            <div ng-if="o.hospcode > 0">
+                                {{o.hospname}}
+                            </div>
+                        </td>
+                        <td align="center">{{o.old|number}}</td>
+                        <td align="center">
+                            <div ng-if="o.screen < 1">0</div>
+                            <div ng-if="o.screen > 0">{{o.screen|number}}</div>      
+                        </td>
+                        <td align="center">{{(o.screen * 100)/o.old|number:2}}</td>
+                        
+                        <td align="center">
+                            <div ng-if="o.nor < 1">0</div>
+                            <div ng-if="o.nor > 0">{{o.nor|number}}</div>    
+                        </td>
+                        <td align="center">
+                            <div ng-if="o.nor < 1">0.00</div>
+                            <div ng-if="o.nor > 0">{{(o.nor * 100)/o.screen| number:2 }}</div> 
+                        </td>
+                        
+                        <td align="center">
+                            <div ng-if="o.ab < 1">0</div>
+                            <div ng-if="o.ab > 0">{{o.ab|number}}</div>                            
+                        </td>
+                        <td align="center">
+                            <div ng-if="o.ab < 1">0.00</div>
+                            <div ng-if="o.ab > 0">{{(o.ab * 100)/o.screen| number:2 }}</div>  
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+</div>
+
+
+
+            <div ng-hide="dataloaded == true" align='center'>
+                <span style='padding-left: 45px;'><i data-role="preloader" data-type="ring"  data-style="color"></i><small>กำลังประมวลผล....</small></span>
+                <!--<i class="ion-loading-c" style="font-size: 32px;"></i>กำลังประมวลผล...-->
+            </div>
+        </div>
+    </div>
+</div>
