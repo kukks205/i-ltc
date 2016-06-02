@@ -18,6 +18,9 @@
                     <span class="icon mif-printer bg-darkGreen"></span>
                 </button>
             </div>
+            <div>
+                <input type="search" ng-model="search" placeholder=" ค้นหา...">
+            </div>
             <div id="exportable">
             <table id="example" class="table striped hovered cell-hovered border bordered" width="100%">
                 <thead>
@@ -40,7 +43,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="o in data">
+                    <tr ng-repeat="o in data | filter:search">
                         <td>
                             <div ng-if="o.hospcode == 0" >{{o.hospname}}</div>
                             <div ng-if="o.hospcode > 0">
