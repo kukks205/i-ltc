@@ -1,10 +1,12 @@
+<div ng-controller="homeController">
 <h3>
     Long Term Care Information System
 </h3>
 <p class="description">
     ระบบสารสนเทศ การดูแลสุขภาพระยะยาว
 </p>
-<div class="flex-grid" ng-controller="homeController">
+
+<div class="flex-grid">
     <div class="row cell-auto-size">
         <div class="cell colspan12" style="padding: 5px;">
             <div class="carousel" data-role="carousel"  data-height="200" data-control-next="<span class='mif-chevron-right'></span>" data-control-prev="<span class='mif-chevron-left'></span>">
@@ -15,7 +17,12 @@
     </div>
 
 </div>
-<div class="flex-grid"  ng-controller="homeController">
+<div>
+    <input type="text" ng-model="usernsme">
+    <p>{{'username = '+username}}</p>
+</div>
+
+<div class="flex-grid"  >
     <div class="row cell-auto-size">
         <div class="cell colspan12" style="padding: 5px;">
             <highchart id="chart1" config="popChart"></highchart>   
@@ -57,3 +64,4 @@
         </div>
     </div>
 </div> -->
+</div>

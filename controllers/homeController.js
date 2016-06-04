@@ -19,6 +19,21 @@ myApp.controller("homeController", function ($scope, $http) {
         saveAs(blob, "i-ltc-Report.xls");
     };
 
+
+$scope.loginCheck = function(user,pass){
+    
+    $http.post('dataService/loginCheck.php',{username:'user',password:'pass'})
+            .success(function(resp){
+                
+            })
+            .error(function(err){
+                
+            });
+    
+}
+
+
+
     $scope.dataloaded = false;
 
     $scope.controllerName = "ข้อมูลประชากรผู้สูงอายุ";
